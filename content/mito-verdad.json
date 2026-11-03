@@ -1,0 +1,15 @@
+{
+  "_aviso": "CONTENIDO DE EJEMPLO. Reemplacen estas afirmaciones por lo visto en clase y borren \"verificar\" (o pongan false) en cada una. Mientras diga true, el juego muestra la etiqueta [VERIFICAR] en pantalla.",
+  "afirmaciones": [
+    { "tema": "Bienestar", "texto": "Bienestar Universitario solo atiende a estudiantes de primer semestre.", "esVerdad": false, "explicacion": "Sus servicios están pensados para toda la comunidad estudiantil, no solo para quienes empiezan.", "verificar": true },
+    { "tema": "Bienestar", "texto": "Bienestar Universitario ofrece actividades de deporte y recreación para estudiantes.", "esVerdad": true, "explicacion": "El deporte y la recreación son una de sus líneas de trabajo.", "verificar": true },
+    { "tema": "Bienestar", "texto": "Para recibir apoyo psicológico hay que pagar una tarifa alta.", "esVerdad": false, "explicacion": "El acompañamiento psicosocial hace parte de los servicios de Bienestar para estudiantes.", "verificar": true },
+    { "tema": "Bienestar", "texto": "Hay grupos de música, teatro y danza abiertos a estudiantes de cualquier programa.", "esVerdad": true, "explicacion": "Los grupos culturales no están reservados a un programa en particular.", "verificar": true },
+    { "tema": "Bienestar", "texto": "Los servicios de Bienestar solo existen en la sede principal.", "esVerdad": false, "explicacion": "Hay servicios y actividades también fuera de la sede principal.", "verificar": true },
+    { "tema": "Internacionalización", "texto": "Un estudiante de pregrado puede hacer un semestre de intercambio en otra universidad.", "esVerdad": true, "explicacion": "La movilidad académica entrante y saliente está abierta a pregrado.", "verificar": true },
+    { "tema": "Internacionalización", "texto": "Para hacer movilidad internacional es obligatorio hablar inglés perfecto.", "esVerdad": false, "explicacion": "El idioma que se pide depende del destino y del convenio, no siempre es inglés ni perfecto.", "verificar": true },
+    { "tema": "Internacionalización", "texto": "Existen convocatorias con apoyo económico para movilidad internacional.", "esVerdad": true, "explicacion": "Hay convocatorias y becas, pero cada una tiene sus propios requisitos y fechas.", "verificar": true },
+    { "tema": "Internacionalización", "texto": "La movilidad internacional solo está disponible para estudiantes de posgrado.", "esVerdad": false, "explicacion": "También existe para estudiantes de pregrado.", "verificar": true },
+    { "tema": "Internacionalización", "texto": "Las materias cursadas en otra universidad pueden reconocerse en tu programa.", "esVerdad": true, "explicacion": "Se puede homologar siguiendo el proceso de la facultad.", "verificar": true }
+  ]
+}
