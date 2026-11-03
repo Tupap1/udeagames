@@ -17,8 +17,10 @@ function mapa({ marcas = [], clase = '' } = {}) {
 }
 
 function marca(punto, clase, etiqueta = null, color = null) {
+  // Cerca de los bordes la etiqueta se acomoda hacia adentro para no salirse del mapa
+  const borde = punto.x > 0.75 ? ' borde-der' : punto.x < 0.25 ? ' borde-izq' : '';
   return el('span', {
-    class: `marca-mapa ${clase}`,
+    class: `marca-mapa ${clase}${borde}`,
     style: { left: `${punto.x * 100}%`, top: `${punto.y * 100}%`, ...(color ? { background: color } : {}) },
     'aria-hidden': 'true',
   }, etiqueta ? el('span', { class: 'marca-etiqueta' }, etiqueta) : null);
