@@ -46,6 +46,42 @@ Node 22 LTS + Express + Socket.io, un solo proceso que sirve el frontend estáti
   hacerlo en 2 minutos.
 - Revisar que ninguna regla de Cloudflare (Access, Bot Fight Mode, WAF) bloquee `/socket.io/`.
 
+## Actualización de la sesión local (2 de noviembre de 2026)
+
+Hecho en local, sin el explain-back de la Fase 1: el equipo pidió saltarlo y hablarlo aparte con el otro agente.
+**El explain-back de la Fase 1 sigue pendiente** (preguntas más abajo) y conviene hacerlo antes de presentar, porque
+el equipo quiere poder arreglar el código en vivo.
+
+- `npm install` (0 vulnerabilidades), `npm test` y `docker build` funcionan. El fallo de `npm ci` de la nube era
+  del entorno. Contenedor y 40 bots sin errores.
+- **Bug del motor corregido** (`server/motor.js`): cuando el temporizador cerraba una ronda no se avisaba a los
+  clientes, así que la pantalla se quedaba en "0 s" hasta el siguiente cambio. Los bots no lo detectaban porque no
+  había juegos. Hay una prueba nueva en `test/motor.test.js`.
+- **Fase 2 y Fase 3 hechas**: Mito o verdad, Ruleta de Bienestar y Adivina el destino (servidor en
+  `server/juegos/`, pantallas en `public/js/juegos/`, contenido en `content/`, pruebas en `test/juegos.test.js`).
+  Los tres están habilitados en `games.config.json`. Ver `README.md` ("Los juegos").
+- **Todo el contenido es de ejemplo** y lleva `"verificar": true`. El servidor avisa al arrancar y la pantalla
+  muestra `[VERIFICAR]`. Los destinos de Adivina el destino NO son convenios reales de la UdeA.
+- Prueba de punta a punta en el contenedor: un host automático jugó los 3 juegos completos con 40 bots (77 caídas,
+  75 reconexiones, 666 inputs aceptados, 0 rechazados, 0 errores, sin errores en los logs del servidor).
+- Recorrido manual en navegador (Chromium del escritorio, 375x812 para el celular): deslizar la tarjeta, ruleta
+  que aterriza en la categoría anunciada, pistas con `P`, puntajes correctos.
+- `scripts/bots.js` ahora distingue rondas de juegos distintos (los ids `r0`, `r1` se repiten entre juegos y los
+  bots se saltaban rondas).
+- README: sección de despliegue (plan A, plan B con Tailscale Funnel) y checklist previa a la presentación.
+
+Decisiones de esta sesión (y lo descartado):
+- Las pistas de Adivina el destino las suelta el host (`P`). Descartado soltarlas por reloj: la difusión solo
+  envía cuando cambia el estado y habría que modificar el motor. Costo: depende del host.
+- La ruleta es animación: la categoría ya está decidida en `crearRondas`. Descartado un giro aleatorio en el
+  servidor por ronda: puede repetir categoría y no hay ventaja real.
+- Un solo cambio en el motor (el aviso al cerrar por tiempo). El resto de los juegos no lo toca.
+- Los juegos reciben `ranking` en el `ctx` del host (cambio en `public/js/host.js`) para mostrarlo en RESULTADOS.
+
+**Sigue sin verificar:** Safari en iPhone y Chrome en Android reales (sobre todo el gesto de deslizar), el proxy y
+el túnel de Cloudflare, el plan B con Tailscale. Fecha: hoy es lunes 2 de noviembre y la presentación es el
+miércoles 4, así que quedan el lunes y el martes. Falta confirmarlo con el equipo.
+
 ## Estado: Fase 1 terminada y probada (salvo lo marcado)
 
 Hecho: lobby con QR, registro, equipos balanceados (4 colores con forma), menú del host, ranking individual y por
@@ -88,7 +124,7 @@ Verificado en la nube:
 
 Orden de juegos y fases originales:
 1. Fase 1 Motor (hecha).
-2. Fase 2 **Mito o verdad** (los dos temas): afirmación, deslizar derecha (verdad) o izquierda (mito), con
+2. Fase 2 **Mito o verdad** (hecha, ver la actualización de arriba) (los dos temas): afirmación, deslizar derecha (verdad) o izquierda (mito), con
    botones de respaldo. Probar gestos en Safari de iPhone. Valida el motor.
 3. Fase 3 Ruleta de Bienestar (host gira ruleta, categoría, pregunta de opción múltiple) y ¿Quién soy? /
    Adivina el destino (pistas que aparecen de a una, más puntos con menos pistas). Comparten mecánica de
