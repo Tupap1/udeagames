@@ -42,24 +42,28 @@ export function chipCategoria(c) {
 }
 
 // Botones A, B, C, D. `correcta` solo se pasa cuando la ronda ya se revelo.
-export function listaOpciones({ opciones, seleccion = null, correcta = null, bloqueada = false, onElegir }) {
+// `etiquetas` (opcional) pone un texto a la derecha de cada opcion, por ejemplo los puntos que valia.
+// Con `marcarIncorrecta: false` la opcion elegida no se pinta de rojo (juegos sin una sola correcta).
+export function listaOpciones({ opciones, seleccion = null, correcta = null, bloqueada = false, onElegir, etiquetas = null, marcarIncorrecta = true }) {
   return el('div', { class: 'opciones' }, opciones.map((texto, i) => {
     const clases = ['opcion'];
     if (seleccion === i) clases.push('elegida');
     if (correcta !== null) {
       if (i === correcta) clases.push('correcta');
-      else if (seleccion === i) clases.push('incorrecta');
+      else if (seleccion === i && marcarIncorrecta) clases.push('incorrecta');
     }
     return el('button', { class: clases.join(' '), type: 'button', disabled: bloqueada, onclick: () => onElegir && onElegir(i) },
-      el('span', { class: 'letra', 'aria-hidden': 'true' }, LETRAS[i]), el('span', {}, texto));
+      el('span', { class: 'letra', 'aria-hidden': 'true' }, LETRAS[i]), el('span', { class: 'opcion-texto' }, texto),
+      etiquetas ? el('span', { class: 'opcion-etiqueta mono' }, etiquetas[i]) : null);
   }));
 }
 
-export function listaOpcionesHost({ opciones, correcta = null, conteo = null }) {
+export function listaOpcionesHost({ opciones, correcta = null, conteo = null, etiquetas = null }) {
   return el('div', { class: 'opciones-host' }, opciones.map((texto, i) => el('div', {
-    class: `opcion-host${correcta === i ? ' correcta' : ''}${correcta !== null && correcta !== i ? ' apagada' : ''}`,
+    class: `opcion-host${correcta === i ? ' correcta' : ''}${correcta !== null && correcta !== i && !etiquetas ? ' apagada' : ''}`,
   },
   el('span', { class: 'letra' }, LETRAS[i]), el('span', { class: 'texto' }, texto),
+  etiquetas ? el('span', { class: 'etiqueta-puntos mono' }, etiquetas[i]) : null,
   conteo ? el('span', { class: 'conteo' }, conteo[i]) : null)));
 }
 
@@ -84,7 +88,10 @@ export function pantallaIntroJugador(cont, j) {
 // Pantalla de opcion multiple del celular (Ruleta y Adivina el destino la comparten).
 // `encabezado(v)` aporta lo propio de cada juego (la categoria o las pistas) y `claveExtra` hace
 // que la pantalla se rehaga cuando ese encabezado cambia.
-export function renderJugadorOpciones(cont, j, ctx, { encabezado, claveExtra = '', pregunta = (v) => v.texto, pie }) {
+export function renderJugadorOpciones(cont, j, ctx, {
+  encabezado, claveExtra = '', pregunta = (v) => v.texto, pie,
+  correcta = (v) => v.correcta, etiquetas = null, resultado = null, marcarIncorrecta = true,
+}) {
   const v = j.vista;
   if (v.error) return pintarSi(cont, 'error', () => el('p', { class: 'suave' }, 'Algo falló en esta ronda. Espera al host.'));
   if (v.intro) return pantallaIntroJugador(cont, j);
@@ -98,9 +105,11 @@ export function renderJugadorOpciones(cont, j, ctx, { encabezado, claveExtra = '
     const pintar = (seleccion) => zonaOpciones.replaceChildren(listaOpciones({
       opciones: v.opciones,
       seleccion,
-      correcta: revelada ? v.correcta : null,
+      correcta: revelada ? correcta(v) : null,
       bloqueada: revelada || enviado,
       onElegir: elegir,
+      etiquetas: revelada && etiquetas ? etiquetas(v) : null,
+      marcarIncorrecta,
     }));
     async function elegir(i) {
       if (enviado) return;
@@ -122,7 +131,7 @@ export function renderJugadorOpciones(cont, j, ctx, { encabezado, claveExtra = '
       mensaje,
       fase === 'ACTIVA' && j.yaRespondi ? el('p', { class: 'suave', style: { textAlign: 'center' } }, 'Respuesta enviada. Esperando a los demás…') : null,
       pie && fase === 'ACTIVA' && !j.yaRespondi ? pie(v) : null,
-      revelada ? bloqueResultado(j, v.mi === v.correcta, v.explicacion) : null,
+      revelada ? (resultado ? resultado(j, v) : bloqueResultado(j, v.mi === correcta(v), v.explicacion)) : null,
       etiquetaVerificar(v.verificar));
   });
 }
@@ -145,7 +154,10 @@ export function panelResultados(cuerpo, j, ctx) {
 
 // Pantalla de opcion multiple del proyector.
 // `encabezado(v)` y `extraRevelada(v)` aportan lo propio del juego.
-export function renderHostOpciones(cuerpo, j, ctx, { encabezado, claveExtra = '', pregunta = (v) => v.texto, bajoPregunta, extraRevelada, controles }) {
+export function renderHostOpciones(cuerpo, j, ctx, {
+  encabezado, claveExtra = '', pregunta = (v) => v.texto, bajoPregunta, extraRevelada, controles,
+  correcta = (v) => v.correcta, etiquetas = null,
+}) {
   const v = j.vista;
   if (v.error) return pintarSi(cuerpo, 'error', () => el('p', { class: 'suave' }, 'Algo falló en esta ronda. Puedes avanzar con Espacio.'));
   if (v.intro) return pantallaIntroHost(cuerpo, v);
@@ -157,7 +169,12 @@ export function renderHostOpciones(cuerpo, j, ctx, { encabezado, claveExtra = ''
     el('p', { class: 'pregunta' }, pregunta(v)),
     bajoPregunta ? bajoPregunta(v) : null,
     revelada ? null : barraTiempo(j.inicioActivaMs, j.finActivaMs, ctx.ahoraServidor),
-    listaOpcionesHost({ opciones: v.opciones, correcta: revelada ? v.correcta : null, conteo: revelada ? v.conteo : null }),
+    listaOpcionesHost({
+      opciones: v.opciones,
+      correcta: revelada ? correcta(v) : null,
+      conteo: revelada ? v.conteo : null,
+      etiquetas: revelada && etiquetas ? etiquetas(v) : null,
+    }),
     revelada && extraRevelada ? extraRevelada(v) : null,
     revelada && v.explicacion ? el('p', { class: 'explicacion' }, v.explicacion) : null,
     revelada ? null : el('p', { class: 'contador-respuestas', 'data-contador': '' }),

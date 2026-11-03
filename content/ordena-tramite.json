@@ -1,0 +1,30 @@
+{
+  "_aviso": "CONTENIDO DE EJEMPLO. Estos pasos son genericos y NO son el procedimiento oficial de la UdeA: reemplacenlos por lo visto en clase y borren \"verificar\" (o pongan false). Escriban los pasos EN EL ORDEN CORRECTO (de 3 a 5); el servidor los desordena al jugar. Se juegan 4 tramites.",
+  "tramites": [
+    {
+      "titulo": "Postularte a un intercambio", "verificar": true,
+      "pasos": ["Revisar la convocatoria y sus requisitos", "Elegir la universidad de destino y las materias", "Enviar la postulación con los documentos", "Esperar el resultado y aceptar la plaza"],
+      "explicacion": "Todo empieza por la convocatoria: ahí están las fechas y los requisitos."
+    },
+    {
+      "titulo": "Preparar el viaje después de ser aceptado", "verificar": true,
+      "pasos": ["Recibir la carta de aceptación", "Tramitar el pasaporte y la visa si se necesita", "Comprar el seguro médico y los tiquetes", "Viajar y presentarse en la universidad de destino"],
+      "explicacion": "La visa casi siempre pide la carta de aceptación, por eso va primero."
+    },
+    {
+      "titulo": "Reconocer las materias al regresar", "verificar": true,
+      "pasos": ["Pedir las notas a la universidad de destino", "Entregar las notas a la facultad", "La facultad estudia la equivalencia", "Las materias quedan reconocidas en tu historia académica"],
+      "explicacion": "Sin las notas oficiales no se puede estudiar la equivalencia."
+    },
+    {
+      "titulo": "Pedir una cita en Bienestar", "verificar": true,
+      "pasos": ["Identificar qué servicio necesitas", "Buscar el canal oficial para pedir la cita", "Agendar la cita", "Asistir y hacer el seguimiento"],
+      "explicacion": "Saber qué necesitas ayuda a llegar al servicio correcto."
+    },
+    {
+      "titulo": "Entrar a un grupo cultural", "verificar": true,
+      "pasos": ["Consultar la oferta de grupos", "Inscribirse en el que te guste", "Ir a la primera sesión", "Presentarse en una muestra o evento"],
+      "explicacion": "La oferta se publica al comienzo del semestre."
+    }
+  ]
+}

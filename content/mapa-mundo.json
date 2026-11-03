@@ -1,0 +1,15 @@
+{
+  "_aviso": "CONTENIDO DE EJEMPLO. Estos lugares NO son convenios reales de la UdeA: reemplacenlos por los destinos vistos en clase y borren \"verificar\" (o pongan false). \"lat\" va de -58 a 84 y \"lon\" de -180 a 180 (se pueden copiar de un mapa: clic derecho en el lugar). Se juegan 5 lugares.",
+  "lugares": [
+    { "nombre": "Lisboa", "pais": "Portugal", "lat": 38.72, "lon": -9.14, "verificar": true },
+    { "nombre": "Ciudad de México", "pais": "México", "lat": 19.43, "lon": -99.13, "verificar": true },
+    { "nombre": "Madrid", "pais": "España", "lat": 40.42, "lon": -3.7, "verificar": true },
+    { "nombre": "Buenos Aires", "pais": "Argentina", "lat": -34.6, "lon": -58.38, "verificar": true },
+    { "nombre": "Montreal", "pais": "Canadá", "lat": 45.5, "lon": -73.57, "verificar": true },
+    { "nombre": "Tokio", "pais": "Japón", "lat": 35.68, "lon": 139.69, "verificar": true },
+    { "nombre": "Seúl", "pais": "Corea del Sur", "lat": 37.57, "lon": 126.98, "verificar": true },
+    { "nombre": "París", "pais": "Francia", "lat": 48.86, "lon": 2.35, "verificar": true },
+    { "nombre": "Sídney", "pais": "Australia", "lat": -33.87, "lon": 151.21, "verificar": true },
+    { "nombre": "São Paulo", "pais": "Brasil", "lat": -23.55, "lon": -46.63, "verificar": true }
+  ]
+}

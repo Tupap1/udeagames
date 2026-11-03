@@ -178,6 +178,80 @@
 }
 .ruleta .panel-resultados { grid-template-columns: 1fr; margin: 0; gap: 1rem; }
 
+/* ---------- Sobrevive el semestre ---------- */
+.chip-semana {
+  justify-self: start; display: inline-block; padding: 0.2em 0.8em; border-radius: 999px;
+  background: var(--celda, #0a1322); color: var(--ambar); font-weight: 600;
+}
+.energia { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 10px; }
+.energia-texto { font-weight: 700; font-size: 14px; }
+.energia-pista { height: 10px; border-radius: 999px; background: rgba(0, 0, 0, 0.28); overflow: hidden; }
+.energia-relleno { display: block; height: 100%; border-radius: 999px; background: var(--ok); transition: width 0.6s ease; }
+.energia.media .energia-relleno { background: var(--ambar); }
+.energia.baja .energia-relleno { background: var(--mal); }
+.opcion-texto { flex: 1; }
+.opcion-etiqueta { font-weight: 600; color: var(--tinta-suave); }
+.opcion.correcta .opcion-etiqueta { color: #1b6b4c; }
+.etiqueta-puntos { color: var(--ambar); font-weight: 600; margin-right: 0.6rem; }
+
+/* ---------- Ordena el trámite ---------- */
+.paso-numero {
+  display: grid; place-items: center; flex-shrink: 0; width: 34px; height: 34px; border-radius: 9px;
+  background: rgba(14, 59, 49, 0.12); color: var(--tinta); font-weight: 600;
+}
+.pasos-elegir { display: grid; gap: 10px; }
+.paso-elegir {
+  display: flex; align-items: center; gap: 12px; width: 100%; min-height: 64px; padding: 10px 14px; text-align: left;
+  border: 0; border-radius: 14px; background: var(--papel); color: var(--tinta); font-size: 17px; font-weight: 750; cursor: pointer;
+}
+.paso-elegir.numerado { box-shadow: 0 0 0 3px var(--ambar); }
+.paso-elegir.numerado .paso-numero { background: var(--pasaporte); color: var(--ambar); }
+.botones-par { display: grid; grid-template-columns: 1fr 2fr; gap: 10px; }
+.pasos-correctos { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.pasos-correctos li {
+  display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 14px;
+  background: var(--papel); color: var(--tinta); font-weight: 750;
+}
+.pasos-correctos li.bien { box-shadow: inset 5px 0 0 var(--ok); }
+.pasos-correctos li.mal { box-shadow: inset 5px 0 0 var(--mal); }
+.paso-marca { margin-left: auto; font-weight: 900; }
+.pasos-correctos li.bien .paso-marca { color: var(--ok); }
+.pasos-correctos li.mal .paso-marca { color: var(--mal); }
+
+.pasos-host { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.pasos-host li {
+  display: flex; align-items: center; gap: 0.9rem; padding: 1rem 1.2rem; border-radius: 0.9rem;
+  background: var(--noche-3); font-size: 1.35rem; font-weight: 750;
+}
+.pasos-host.revelados { grid-template-columns: minmax(0, 1fr); gap: 0.6rem; }
+.pasos-host .paso-numero { width: 1.9em; height: 1.9em; border-radius: 0.35em; background: var(--celda); color: var(--ambar); font-size: 0.95em; }
+.pasos-host .texto { flex: 1; }
+.pasos-host .porcentaje { color: var(--texto-suave); font-size: 0.85em; }
+
+/* ---------- Mapa del mundo ---------- */
+.mapa { position: relative; aspect-ratio: 1000 / 394; background: #0b1424; border-radius: 0.8rem; }
+.mapa img { display: block; width: 100%; height: 100%; border-radius: inherit; user-select: none; -webkit-user-drag: none; }
+.mapa.tocable { cursor: crosshair; }
+.mapa-desliza { overflow-x: auto; border-radius: 14px; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.mapa-desliza .mapa { width: 230%; border-radius: 14px; }
+.marca-mapa {
+  position: absolute; z-index: 1; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid #fff; pointer-events: none;
+}
+.marca-mapa.yo { width: 20px; height: 20px; background: var(--ambar); box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.35); }
+.marca-mapa.real { z-index: 2; width: 22px; height: 22px; background: #fff; border: 5px solid var(--ok); box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.35); }
+.marca-mapa.toque { width: 0.75rem; height: 0.75rem; border-width: 1.5px; opacity: 0.92; }
+.marca-etiqueta {
+  position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%); white-space: nowrap;
+  padding: 2px 9px; border-radius: 999px; background: var(--papel); color: var(--tinta); font-size: 12px; font-weight: 800;
+}
+.cuerpo-juego .marca-etiqueta { font-size: 0.9rem; }
+.escena-mapa .fila-etiquetas .pregunta { margin: 0; text-align: left; }
+.mapa-con-lista { display: flex; gap: 1.5rem; align-items: flex-start; justify-content: center; }
+.mapa.grande { flex: 1; min-width: 0; max-width: calc(55vh * 1000 / 394); }
+.cercanos { width: 17rem; flex-shrink: 0; display: grid; gap: 0.6rem; }
+.cercanos h2 { font-size: 1.2rem; }
+
 @media (prefers-reduced-motion: reduce) {
   .pistas li:last-child { animation: none; }
 }

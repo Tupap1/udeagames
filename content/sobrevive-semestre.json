@@ -1,0 +1,81 @@
+{
+  "_aviso": "CONTENIDO DE EJEMPLO. Reemplacen las situaciones por lo visto en clase y borren \"verificar\" (o pongan false). Cada opcion lleva \"puntos\" de 0 a 100: la mejor decision 100 y las demas menos. No hace falta que haya una sola de 100. \"semana\" (1 a 20) solo ordena las rondas. Se juegan 6 situaciones.",
+  "situaciones": [
+    {
+      "semana": 1, "verificar": true,
+      "texto": "Llegas a la U y no conoces a nadie en tu grupo.",
+      "opciones": [
+        { "texto": "Me inscribo en un grupo deportivo o cultural de Bienestar", "puntos": 100 },
+        { "texto": "Espero a que alguien me hable", "puntos": 40 },
+        { "texto": "Paso todo el tiempo solo con el celular", "puntos": 10 },
+        { "texto": "Dejo de ir a clase", "puntos": 0 }
+      ],
+      "explicacion": "Los grupos de Bienestar son una forma fácil de conocer gente de otros programas."
+    },
+    {
+      "semana": 4, "verificar": true,
+      "texto": "Esta semana no te alcanza la plata para el almuerzo.",
+      "opciones": [
+        { "texto": "Pregunto en Bienestar por los apoyos de alimentación", "puntos": 100 },
+        { "texto": "Le pido prestado a un compañero cada día", "puntos": 40 },
+        { "texto": "Compro solo dulces para aguantar", "puntos": 10 },
+        { "texto": "Me salto el almuerzo toda la semana", "puntos": 0 }
+      ],
+      "explicacion": "Existen apoyos socioeconómicos pensados para esto; los requisitos se confirman en el canal oficial."
+    },
+    {
+      "semana": 8, "verificar": true,
+      "texto": "Tienes tres parciales la misma semana y no estás durmiendo.",
+      "opciones": [
+        { "texto": "Organizo un horario y busco orientación para manejar el estrés", "puntos": 100 },
+        { "texto": "Hablo con los profesores para saber qué priorizar", "puntos": 70 },
+        { "texto": "Estudio toda la noche a punta de café", "puntos": 20 },
+        { "texto": "Copio en el examen", "puntos": 0 }
+      ],
+      "explicacion": "Pedir orientación a tiempo funciona mejor que aguantar sin dormir."
+    },
+    {
+      "semana": 10, "verificar": true,
+      "texto": "Hace días te duele una muela.",
+      "opciones": [
+        { "texto": "Pido una cita en el servicio de salud", "puntos": 100 },
+        { "texto": "Le pregunto a un amigo qué tomar", "puntos": 30 },
+        { "texto": "Me automedico", "puntos": 20 },
+        { "texto": "Espero a que se pase sola", "puntos": 0 }
+      ],
+      "explicacion": "La atención en salud es uno de los servicios básicos de Bienestar."
+    },
+    {
+      "semana": 12, "verificar": true,
+      "texto": "Hace semanas te sientes triste y sin ganas de nada.",
+      "opciones": [
+        { "texto": "Busco el apoyo psicosocial de Bienestar", "puntos": 100 },
+        { "texto": "Se lo cuento a alguien de confianza", "puntos": 70 },
+        { "texto": "Me aíslo de todos", "puntos": 0 },
+        { "texto": "Lo ignoro y sigo igual", "puntos": 0 }
+      ],
+      "explicacion": "El acompañamiento psicosocial es un espacio de escucha, sin nota y sin juicio."
+    },
+    {
+      "semana": 14, "verificar": true,
+      "texto": "Te invitan a hacer deporte en la U, pero sientes que no tienes tiempo.",
+      "opciones": [
+        { "texto": "Pruebo una actividad corta entre clases", "puntos": 100 },
+        { "texto": "Lo dejo para las vacaciones", "puntos": 30 },
+        { "texto": "Me inscribo en todo y no voy a nada", "puntos": 10 },
+        { "texto": "Nunca hago ejercicio", "puntos": 0 }
+      ],
+      "explicacion": "Moverse un poco ayuda a rendir mejor en el estudio."
+    },
+    {
+      "semana": 16, "verificar": true,
+      "texto": "Terminas el semestre agotado.",
+      "opciones": [
+        { "texto": "Descanso y planeo el próximo semestre con tiempo para mí", "puntos": 100 },
+        { "texto": "Matriculo más materias para salir rápido", "puntos": 20 },
+        { "texto": "No pienso en eso hasta que empiecen las clases", "puntos": 40 }
+      ],
+      "explicacion": "Planear el descanso también es parte de cuidarse."
+    }
+  ]
+}
