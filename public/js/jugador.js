@@ -238,6 +238,12 @@ function renderMenu(cont) {
 
 function renderVotacion(cont) {
   const v = vista.votacion;
+  if (v.modo === 'azar') {
+    return marco(cont, `sorteo|${v.inicioMs}`, () => el('div', { class: 'pila' },
+      el('div', { class: 'estado-grande' },
+        el('h1', {}, 'Sorteando el destino'),
+        el('p', { class: 'suave' }, 'Mira el proyector: la pizarra está eligiendo el próximo destino.'))));
+  }
   const clave = `votacion|${v.inicioMs}|${v.miVoto}|${v.cerrada}`;
   marco(cont, clave, () => {
     const elegido = v.opciones.find((o) => o.id === v.ganador);

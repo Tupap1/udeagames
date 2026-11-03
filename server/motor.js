@@ -19,7 +19,7 @@ const TIEMPOS_POR_DEFECTO = Object.freeze({
   votacionMs: 20_000,
 });
 
-function crearMotor({ juegos = new Map(), ahora = Date.now, log = console, tiempos = {} } = {}) {
+function crearMotor({ juegos = new Map(), ahora = Date.now, log = console, tiempos = {}, azar = Math.random } = {}) {
   const estado = crearEstado();
   const t = { ...TIEMPOS_POR_DEFECTO, ...tiempos };
   let timer = null; // cierre de la ronda activa
@@ -193,18 +193,42 @@ function crearMotor({ juegos = new Map(), ahora = Date.now, log = console, tiemp
     if (conectadosTotal > 0 && respondieron === conectadosTotal) cerrarActiva();
   }
 
-  // ---------- Votacion del siguiente juego ----------
+  // ---------- Destinos de la sesion ----------
+
+  // Los que el host dejo en la sesion, en el orden en que estan habilitados
+  function destinosActivos() {
+    const todos = [...juegos.keys()];
+    return estado.destinos ? todos.filter((id) => estado.destinos.includes(id)) : todos;
+  }
+  motor.destinosActivos = destinosActivos;
+
+  motor.hostDestinos = (ids) => {
+    if (estado.fase !== FASES.MENU && estado.fase !== FASES.LOBBY) return error('fase_invalida');
+    if (!Array.isArray(ids)) return error('destinos_invalidos');
+    const validos = [...new Set(ids.map(String))].filter((id) => juegos.has(id));
+    if (validos.length === 0) return error('sin_destinos');
+    estado.destinos = validos;
+    cambio();
+    return ok();
+  };
+
+  // Entre los destinos de la sesion, primero los que faltan por jugar
+  function candidatos(minimo) {
+    const activos = destinosActivos();
+    const pendientes = activos.filter((id) => !estado.juegosJugados.includes(id));
+    return pendientes.length >= minimo ? pendientes : activos;
+  }
+
+  // ---------- Votacion o sorteo del siguiente juego ----------
 
   motor.hostAbrirVotacion = () => {
     if (estado.fase !== FASES.MENU) return error('fase_invalida');
-    const todos = [...juegos.keys()];
-    const pendientes = todos.filter((id) => !estado.juegosJugados.includes(id));
-    // Se vota entre los que faltan; si queda uno solo no tiene sentido votar, entonces entran todos
-    const opciones = pendientes.length >= 2 ? pendientes : todos;
+    // Si queda uno solo por jugar no tiene sentido votar: entran todos los de la sesion
+    const opciones = candidatos(2);
     if (opciones.length < 2) return error('pocas_opciones');
     const inicio = ahora();
     estado.fase = FASES.VOTACION;
-    estado.votacion = { opciones, votos: new Map(), inicioMs: inicio, finMs: inicio + t.votacionMs, cerrada: false, ganador: null, empate: null };
+    estado.votacion = { modo: 'votos', opciones, votos: new Map(), inicioMs: inicio, finMs: inicio + t.votacionMs, cerrada: false, ganador: null, empate: null };
     clearTimeout(timerVotacion);
     const v = estado.votacion;
     timerVotacion = setTimeout(() => {
@@ -215,6 +239,19 @@ function crearMotor({ juegos = new Map(), ahora = Date.now, log = console, tiemp
     if (timerVotacion.unref) timerVotacion.unref();
     cambio();
     return ok();
+  };
+
+  // Sorteo: el servidor elige al azar y el proyector lo anima en la pizarra. Se arranca con Espacio.
+  motor.hostAleatorio = () => {
+    if (estado.fase !== FASES.MENU) return error('fase_invalida');
+    const opciones = candidatos(1);
+    if (opciones.length === 0) return error('sin_destinos');
+    const ganador = opciones[Math.min(opciones.length - 1, Math.floor(azar() * opciones.length))];
+    const inicio = ahora();
+    estado.fase = FASES.VOTACION;
+    estado.votacion = { modo: 'azar', opciones, votos: new Map(), inicioMs: inicio, finMs: inicio, cerrada: true, ganador, empate: null };
+    cambio();
+    return ok({ ganador });
   };
 
   motor.votar = (jugadorId, juegoId) => {
@@ -474,9 +511,9 @@ function crearMotor({ juegos = new Map(), ahora = Date.now, log = console, tiemp
   motor.hostReiniciar = () => {
     limpiarTodo();
     const sockets = [...estado.jugadores.values()].map((p) => p.socketId).filter(Boolean);
-    const { hostSockets, sala, automatico } = estado;
+    const { hostSockets, sala, automatico, destinos } = estado;
     Object.assign(estado, crearEstado());
-    Object.assign(estado, { hostSockets, sala, automatico }); // el host sigue autenticado
+    Object.assign(estado, { hostSockets, sala, automatico, destinos }); // el host sigue autenticado
     cambio();
     return ok({ sockets });
   };

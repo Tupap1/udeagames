@@ -222,44 +222,117 @@ function columnaClasificacion() {
     barrasEquipos(vista.equipos));
 }
 
+// Nombre en letras de pizarra con el tema debajo (en columna aparte no cabian los nombres largos)
+const nombreDestino = (j) => el('span', { class: 'destino-nombre' }, textoPizarra(j.nombre, { max: 22 }), el('span', { class: 'destino-tema' }, j.tema));
+
 function filaDestino(j, { onclick, derecha, clase = '' }) {
   return el('li', {},
     el('button', { class: `fila-destino ${clase}`, type: 'button', onclick, disabled: !onclick },
-      textoPizarra(j.nombre, { max: 20 }),
-      el('span', { class: 'destino-tema' }, j.tema),
+      nombreDestino(j),
       derecha));
+}
+
+// Cada destino: tocarlo lo elige ya; el interruptor de la derecha lo deja dentro o fuera de la sesion
+// (la votacion y el sorteo solo usan los que estan dentro)
+function filaMenu(j, juegos) {
+  const dentro = juegos.filter((x) => x.enSesion).map((x) => x.id);
+  const alternar = () => {
+    const ids = j.enSesion ? dentro.filter((id) => id !== j.id) : [...dentro, j.id];
+    if (ids.length) enviar('host:destinos', { ids });
+  };
+  return el('li', { class: `fila-menu${j.enSesion ? '' : ' fuera'}` },
+    el('button', { class: 'fila-destino', type: 'button', onclick: () => enviar('host:elegirJuego', { juegoId: j.id }), 'aria-label': `Jugar ${j.nombre} ahora` },
+      nombreDestino(j),
+      el('span', { class: `destino-estado mono ${j.jugado ? 'completado' : ''}` }, j.jugado ? 'LLEGÓ' : j.enSesion ? 'ABORDANDO' : 'FUERA')),
+    el('button', {
+      class: `interruptor${j.enSesion ? ' activo' : ''}`, type: 'button', role: 'switch',
+      'aria-checked': j.enSesion ? 'true' : 'false', 'aria-label': `${j.nombre} en la sesión`,
+      title: j.enSesion ? 'Quitar de la sesión' : 'Agregar a la sesión',
+      onclick: alternar,
+    }, el('span', { class: 'interruptor-bolita' })));
 }
 
 function renderMenu(esc, ctl) {
   const { juegos } = vista.menu;
-  const clave = `menu|${juegos.map((j) => `${j.id}${j.jugado}`).join(',')}|${vista.ranking.map((r) => r.puntos).join(',')}`;
+  const enSesion = juegos.filter((j) => j.enSesion);
+  const clave = `menu|${juegos.map((j) => `${j.id}${j.jugado}${j.enSesion}`).join(',')}|${vista.ranking.map((r) => r.puntos).join(',')}`;
   const raiz = marco(esc, clave, () => el('div', { class: 'destinos' },
     el('section', { class: 'tablero' },
       el('div', { class: 'tablero-cabecera' },
         el('h1', { class: 'titulo-pizarra' }, textoPizarra('Salidas', { max: 10 })),
-        el('p', { class: 'contador-tablero' }, 'Toca un destino para elegirlo, o deja que voten')),
-      el('div', { class: 'tablero-columnas destinos-columnas', 'aria-hidden': 'true' },
-        el('span', {}, 'Destino'), el('span', {}, 'Tema'), el('span', {}, 'Estado')),
+        el('p', { class: 'contador-tablero' }, `${enSesion.length} de ${juegos.length} destinos en la sesión`)),
+      el('div', { class: 'tablero-columnas menu-columnas', 'aria-hidden': 'true' },
+        el('span', {}, 'Destino'), el('span', {}, 'Estado'), el('span', {}, 'En la sesión')),
       juegos.length
-        ? el('ol', { class: 'filas-destino' }, juegos.map((j) => filaDestino(j, {
-          onclick: () => enviar('host:elegirJuego', { juegoId: j.id }),
-          derecha: el('span', { class: `destino-estado mono ${j.jugado ? 'completado' : ''}` }, j.jugado ? 'LLEGÓ' : 'ABORDANDO'),
-        })))
-        : el('p', { class: 'tablero-vacio' }, 'No hay juegos habilitados. Agrega su id en games.config.json y reinicia el servidor.')),
+        ? el('ol', { class: 'filas-destino' }, juegos.map((j) => filaMenu(j, juegos)))
+        : el('p', { class: 'tablero-vacio' }, 'No hay juegos habilitados. Agrega su id en games.config.json y reinicia el servidor.'),
+      el('p', { class: 'nota-menu' }, 'Toca un destino para jugarlo ya. La votación y el sorteo eligen solo entre los que están en la sesión.')),
     columnaClasificacion()));
   raiz.querySelectorAll('.titulo-pizarra .pizarra-texto').forEach((t) => { if (!t.dataset.volteado) { t.dataset.volteado = '1'; voltear(t, { retrasoPorLetra: 2 }); } });
 
   poner(ctl,
     botonControl('Podio final', '', () => enviar('host:mostrarPodio'), 'secundario'),
     el('span', { class: 'espaciador' }),
-    juegos.length >= 2 ? botonControl('Votar el destino', 'Espacio', () => enviar('host:abrirVotacion')) : null);
-  atajoPrincipal = juegos.length >= 2 ? () => enviar('host:abrirVotacion') : null;
+    enSesion.length ? botonControl('Al azar', 'A', () => enviar('host:aleatorio'), 'secundario') : null,
+    enSesion.length >= 2 ? botonControl('Votar el destino', 'Espacio', () => enviar('host:abrirVotacion')) : null);
+  atajoPrincipal = enSesion.length >= 2 ? () => enviar('host:abrirVotacion') : null;
+}
+
+// ---------- Sorteo al azar ----------
+
+// La pizarra recorre los destinos cada vez mas despacio hasta caer en el que eligio el servidor
+function animarSorteo(botones, indice, alTerminar) {
+  const n = botones.length;
+  const terminar = () => {
+    botones.forEach((b, i) => { b.classList.toggle('resaltada', i === indice); b.classList.toggle('apagada', i !== indice); });
+    voltear(botones[indice].querySelector('.pizarra-texto'));
+    alTerminar();
+  };
+  if (!n || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return terminar();
+  const total = n * 3 + indice + 1;
+  let paso = 0;
+  const tic = () => {
+    if (paso > 0 && !botones[0].isConnected) return;
+    botones.forEach((b, i) => b.classList.toggle('resaltada', i === paso % n));
+    paso += 1;
+    if (paso >= total) return terminar();
+    setTimeout(tic, 70 + 330 * (paso / total) ** 2);
+  };
+  tic();
+}
+
+function renderSorteo(esc, ctl) {
+  const v = vista.votacion;
+  const ganador = v.opciones.find((o) => o.id === v.ganador);
+  marco(esc, `sorteo|${v.inicioMs}`, () => {
+    const filas = v.opciones.map((o) => filaDestino(o, { derecha: el('span', { class: 'destino-estado mono' }, '') }));
+    const resultado = el('p', { class: 'resultado-votacion', role: 'status' });
+    const nodo = el('div', { class: 'destinos votacion' },
+      el('section', { class: 'tablero' },
+        el('div', { class: 'tablero-cabecera' },
+          el('h1', { class: 'titulo-votacion' }, 'Sorteando el destino'),
+          el('p', { class: 'contador-tablero' }, `Entre ${v.opciones.length} ${v.opciones.length === 1 ? 'destino' : 'destinos'} de la sesión`)),
+        el('ol', { class: 'filas-destino' }, filas),
+        resultado),
+      columnaClasificacion());
+    animarSorteo(filas.map((li) => li.firstElementChild), v.opciones.indexOf(ganador), () => {
+      resultado.textContent = `Destino sorteado: ${ganador.nombre}`;
+    });
+    return nodo;
+  });
+  poner(ctl,
+    botonControl('Cancelar sorteo', '', () => enviar('host:volverAMenu'), 'secundario'),
+    el('span', { class: 'espaciador' }),
+    botonControl('Sortear otra vez', '', () => { enviar('host:volverAMenu'); setTimeout(() => enviar('host:aleatorio'), 150); }, 'secundario'),
+    botonControl(`Empezar ${ganador.nombre}`, 'Espacio', () => enviar('host:avanzar')));
+  atajoPrincipal = () => enviar('host:avanzar');
 }
 
 // ---------- Votación ----------
 
 function renderVotacion(esc, ctl) {
   const v = vista.votacion;
+  if (v.modo === 'azar') return renderSorteo(esc, ctl);
   const total = Math.max(1, ...v.opciones.map((o) => o.votos || 0));
   const raiz = marco(esc, `votacion|${v.inicioMs}`, () => el('div', { class: 'destinos votacion' },
     el('section', { class: 'tablero' },
@@ -504,6 +577,7 @@ $('btn-cerrar-sala').addEventListener('click', () => {
 document.addEventListener('keydown', (ev) => {
   if (!autenticado || ev.target instanceof HTMLInputElement) return;
   if (ev.key === 'j' || ev.key === 'J') alternarPanel();
+  if ((ev.key === 'a' || ev.key === 'A') && vista?.fase === 'MENU' && panel.hidden) enviar('host:aleatorio');
   if ((ev.key === ' ' || ev.key === 'ArrowRight') && atajoPrincipal && panel.hidden) {
     ev.preventDefault();
     atajoPrincipal();

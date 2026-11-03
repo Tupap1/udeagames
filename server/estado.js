@@ -44,6 +44,8 @@ function crearEstado() {
     votacion: null,
     // ids de juegos que ya terminaron (para marcarlos en el menu)
     juegosJugados: [],
+    // Destinos que el host dejo en la sesion (null = todos los habilitados). La votacion y el azar eligen entre estos.
+    destinos: null,
     // Modo automatico: la respuesta y el ranking avanzan solos
     automatico: true,
     // sockets autenticados como host

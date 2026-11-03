@@ -90,6 +90,8 @@ function registrarEventosHost(io, socket, motor, difusion, config) {
   socket.on('host:mostrarPodio', exigirHost(() => motor.hostMostrarPodio()));
   socket.on('host:abrirVotacion', exigirHost(() => motor.hostAbrirVotacion()));
   socket.on('host:cerrarVotacion', exigirHost(() => motor.hostCerrarVotacion()));
+  socket.on('host:aleatorio', exigirHost(() => motor.hostAleatorio()));
+  socket.on('host:destinos', exigirHost((d) => motor.hostDestinos(d.ids)));
   socket.on('host:automatico', exigirHost((d) => motor.hostAutomatico(d.activo)));
 
   socket.on('host:expulsar', exigirHost((d) => {

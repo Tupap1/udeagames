@@ -95,11 +95,17 @@ html { font-size: clamp(16px, 1.45vw, 30px); }
 .destinos-columnas { grid-template-columns: minmax(0, 1fr) 12rem 9rem; }
 .filas-destino { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
 .fila-destino {
-  width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) 12rem 9rem; align-items: center; gap: 1rem;
-  padding: 0.85rem 1rem; border: 0; border-radius: 0.7rem; background: var(--noche-3); color: var(--texto);
+  width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) 8rem; align-items: center; gap: 1rem;
+  padding: 0.55rem 1rem; border: 0; border-radius: 0.7rem; background: var(--noche-3); color: var(--texto);
   text-align: left; cursor: pointer; transition: box-shadow var(--dur) ease, opacity var(--dur) ease;
 }
-.fila-destino .pizarra-texto { font-size: 1.1rem; }
+.destino-nombre { display: grid; gap: 0.15rem; justify-items: start; min-width: 0; }
+.destinos .tablero { gap: 0.55rem; padding: 1rem 1.3rem; }
+.destinos .titulo-pizarra { font-size: 1.6rem; }
+.destinos .fila-destino { padding: 0.45rem 1rem; }
+.destinos .destino-tema { font-size: 0.8rem; }
+.destinos .filas-destino { gap: 0.4rem; }
+.fila-destino .pizarra-texto { font-size: 0.95rem; }
 .fila-destino:hover:not(:disabled), .fila-destino:focus-visible { box-shadow: inset 0 0 0 2px var(--ambar); outline: none; }
 .fila-destino:disabled { cursor: default; }
 .destino-tema { color: var(--texto-suave); font-size: 0.88rem; }
@@ -108,7 +114,23 @@ html { font-size: clamp(16px, 1.45vw, 30px); }
 .fila-destino.resaltada { box-shadow: inset 0 0 0 2px var(--ambar); background: #2b2f2c; }
 .fila-destino.apagada { opacity: 0.4; }
 
-.votacion .fila-destino { grid-template-columns: minmax(0, 1fr) 10rem 12rem; }
+/* Menú: cada destino con su interruptor de "en la sesión" */
+.fila-menu { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.7rem; align-items: center; }
+.fila-menu.fuera .fila-destino { opacity: 0.45; }
+.menu-columnas { grid-template-columns: minmax(0, 1fr) 8rem 4.3rem; gap: 1.7rem; padding-right: 0; }
+.interruptor {
+  position: relative; flex-shrink: 0; width: 3.6rem; height: 2rem; border: 0; border-radius: 999px;
+  background: var(--linea); cursor: pointer; transition: background-color var(--dur) ease;
+}
+.interruptor-bolita {
+  position: absolute; top: 0.25rem; left: 0.25rem; width: 1.5rem; height: 1.5rem; border-radius: 50%;
+  background: var(--texto-suave); transition: transform var(--dur) ease, background-color var(--dur) ease;
+}
+.interruptor.activo { background: var(--ambar); }
+.interruptor.activo .interruptor-bolita { transform: translateX(1.6rem); background: var(--ambar-tinta); }
+.nota-menu { color: var(--texto-suave); font-size: 0.85rem; }
+
+.votacion .fila-destino { grid-template-columns: minmax(0, 1fr) 12rem; }
 .titulo-votacion { font-size: 2.3rem; }
 .votos { display: flex; align-items: center; gap: 0.7rem; }
 .votos-pista { flex: 1; height: 0.55rem; border-radius: 999px; background: var(--linea); overflow: hidden; }

@@ -76,12 +76,14 @@ function resumenVotacion(motor, jugador) {
     return { id, nombre: e.nombre, tema: e.tema, descripcion: e.descripcion, votos: jugador && !v.cerrada ? null : conteo[id] };
   });
   return {
+    modo: v.modo,
     opciones,
     totalVotos: v.votos.size,
     inicioMs: v.inicioMs,
     finMs: v.finMs,
     cerrada: v.cerrada,
-    ganador: v.ganador,
+    // En el sorteo el celular no sabe el resultado: lo descubre con la animacion del proyector
+    ganador: jugador && v.modo === 'azar' ? null : v.ganador,
     empate: v.empate,
     miVoto: jugador ? v.votos.get(jugador.id) || null : undefined,
   };
@@ -151,6 +153,7 @@ function vistaHost(motor, cache, publicUrl) {
         tema: e.tema,
         descripcion: e.descripcion,
         jugado: estado.juegosJugados.includes(e.id),
+        enSesion: motor.destinosActivos().includes(e.id),
       })),
     },
     juego: estado.fase === FASES.JUEGO ? resumenJuego(motor, 'host') : null,
