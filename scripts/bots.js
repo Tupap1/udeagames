@@ -76,10 +76,12 @@ function crearBot(indice) {
 
 function responderSiToca(bot) {
   const j = bot.vista && bot.vista.juego;
-  if (!j || j.subfase !== 'ACTIVA' || j.yaRespondi || bot.rondaRespondida === j.rondaId) return;
+  // Los ids de ronda (r0, r1...) se repiten entre juegos: la clave incluye el juego y cuando empezo la ronda
+  const claveRonda = j && `${j.id}:${j.rondaId}:${j.inicioActivaMs}`;
+  if (!j || j.subfase !== 'ACTIVA' || j.yaRespondi || bot.rondaRespondida === claveRonda) return;
   const entrada = juegos.get(j.id);
   if (!entrada || typeof entrada.modulo.generarInputBot !== 'function') return;
-  bot.rondaRespondida = j.rondaId;
+  bot.rondaRespondida = claveRonda;
   const espera = Math.random() * RETRASO_MAX;
   setTimeout(() => {
     if (!bot.socket || !bot.socket.connected) return;

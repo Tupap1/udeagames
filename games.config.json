@@ -1,4 +1,4 @@
 {
   "comentario": "Un juego solo aparece en el menu del host cuando su id esta en esta lista. Agregalo cuando lo hayan probado.",
-  "habilitados": []
+  "habilitados": ["mito-verdad", "ruleta-bienestar", "adivina-destino"]
 }
