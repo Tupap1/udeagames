@@ -71,9 +71,8 @@ if (require.main === module) {
     .then(async (s) => {
       await s.escuchar();
       console.log('\n=== Pasaporte UdeA en vivo ===');
-      console.log(`Jugadores:  ${config.publicUrl}`);
-      console.log(`Host:       ${config.publicUrl}/host`);
-      console.log(`PIN host:   ${config.hostPin}${config.pinGenerado ? '  (generado al azar; defina HOST_PIN para fijarlo)' : ''}`);
+      console.log(`Link:       ${config.publicUrl}  (ábrelo primero en el computador del proyector y pulsa "Crear sala")`);
+      console.log(`PIN host:   ${config.hostPin}${config.pinGenerado ? '  (generado al azar; defina HOST_PIN para fijarlo)' : ''}  (solo para recuperar el control desde otro equipo)`);
       console.log(`Puerto:     ${config.port}`);
       console.log(`Juegos habilitados: ${s.motor.juegos.size ? [...s.motor.juegos.keys()].join(', ') : '(ninguno)'}\n`);
 

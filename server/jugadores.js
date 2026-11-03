@@ -1,6 +1,6 @@
 // Registro, equipos, reconexion y expulsion de jugadores.
 const crypto = require('node:crypto');
-const { EQUIPOS } = require('./estado');
+const { EQUIPOS, AVATARES } = require('./estado');
 
 const NOMBRE_MIN = 2;
 const NOMBRE_MAX = 20;
@@ -66,6 +66,7 @@ function unirse(estado, { sessionId, nombre, socketId }, { ahora = Date.now, aza
     sessionId: crypto.randomUUID(),
     nombre: v.nombre,
     equipoId: elegirEquipo(estado, azar),
+    avatar: AVATARES[Math.floor(azar() * AVATARES.length)],
     puntos: 0,
     tiempoMs: 0, // suma de tiempos de respuesta acertada, para desempatar
     sellos: [],

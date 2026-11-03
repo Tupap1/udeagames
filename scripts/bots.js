@@ -34,7 +34,8 @@ const RAMPA = Number(args.rampa) || 50;
 // Cada juego define como responder al azar con generarInputBot(vistaJugador)
 const juegos = cargarJuegos({ habilitados: config.juegosHabilitados, dirContenido: config.dirContenido, log: { log() {}, error() {} } });
 
-const stats = { unidos: 0, errores: 0, caidas: 0, reconexiones: 0, inputsOk: 0, inputsRechazados: 0, latenciasJoin: [] };
+const stats = { unidos: 0, errores: 0, caidas: 0, reconexiones: 0, inputsOk: 0, inputsRechazados: 0, votos: 0, latenciasJoin: [] };
+let avisoSinSala = false;
 const bots = [];
 
 function crearBot(indice) {
@@ -46,7 +47,7 @@ function crearBot(indice) {
     bot.socket = socket;
     const t0 = Date.now();
 
-    socket.on('connect', () => {
+    function unirse() {
       socket.emit('jugador:unirse', { sessionId: bot.sessionId || undefined, nombre }, (r) => {
         if (r && r.ok) {
           bot.sessionId = r.sessionId;
@@ -55,16 +56,23 @@ function crearBot(indice) {
             stats.unidos++;
             stats.latenciasJoin.push(Date.now() - t0);
           }
+        } else if (r && r.error === 'sin_sala') {
+          // Todavia nadie abrio la sala: se reintenta sin contarlo como error
+          if (!avisoSinSala) console.log('[bots] No hay sala abierta: abre el link en el proyector y pulsa "Crear sala".');
+          avisoSinSala = true;
+          setTimeout(() => socket.connected && unirse(), 2000);
         } else {
           stats.errores++;
           console.error(`[${nombre}] no pudo unirse:`, r && r.error);
         }
       });
-    });
+    }
+    socket.on('connect', unirse);
 
     socket.on('vista', (v) => {
       bot.vista = v;
       responderSiToca(bot);
+      votarSiToca(bot);
     });
     socket.on('expulsado', () => { bot.sessionId = null; });
     socket.on('connect_error', () => { stats.errores++; });
@@ -93,6 +101,30 @@ function responderSiToca(bot) {
   }, espera);
 }
 
+// En la votacion cada bot vota una vez por un juego al azar
+function votarSiToca(bot) {
+  const v = bot.vista && bot.vista.votacion;
+  if (!v || v.cerrada || v.miVoto || bot.votoEnviado === v.inicioMs) return;
+  bot.votoEnviado = v.inicioMs;
+  setTimeout(() => {
+    if (!bot.socket || !bot.socket.connected) return;
+    const opcion = v.opciones[Math.floor(Math.random() * v.opciones.length)];
+    bot.socket.emit('jugador:votar', { juegoId: opcion.id }, (r) => {
+      if (r && r.ok) stats.votos++;
+    });
+  }, Math.random() * RETRASO_MAX);
+}
+
+// En la sala de espera y entre juegos, de vez en cuando un bot manda una reaccion al proyector
+function simularReacciones() {
+  for (const bot of bots) {
+    const v = bot.vista;
+    if (!v || !bot.socket || !bot.socket.connected || !['LOBBY', 'MENU'].includes(v.fase) || Math.random() > 0.04) continue;
+    const lista = v.catalogo.reacciones;
+    bot.socket.emit('jugador:reaccion', { reaccion: lista[Math.floor(Math.random() * lista.length)] });
+  }
+}
+
 // Cada segundo, algunos bots se caen y vuelven a los 1 a 4 s con su sessionId
 function simularCaidas() {
   for (const bot of bots) {
@@ -111,7 +143,7 @@ function resumen() {
   const max = l.length ? Math.max(...l) : 0;
   console.log(
     `[bots] conectados ${conectados}/${N} | unidos ${stats.unidos} | caidas ${stats.caidas} | reconexiones ${stats.reconexiones}` +
-    ` | inputs ok ${stats.inputsOk} rechazados ${stats.inputsRechazados} | errores ${stats.errores}` +
+    ` | inputs ok ${stats.inputsOk} rechazados ${stats.inputsRechazados} | votos ${stats.votos} | errores ${stats.errores}` +
     ` | latencia de union prom ${prom} ms, max ${max} ms`,
   );
 }
@@ -123,6 +155,7 @@ for (let i = 0; i < N; i++) {
   setTimeout(() => bot.conectar(), i * RAMPA);
 }
 setInterval(simularCaidas, 1000);
+setInterval(simularReacciones, 1000);
 setInterval(resumen, 5000);
 
 function salir() {

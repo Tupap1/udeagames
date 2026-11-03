@@ -1,5 +1,5 @@
 // Construye lo que ve cada cliente. Los clientes solo pintan lo que reciben aqui.
-const { FASES, SUBFASES, EQUIPOS } = require('./estado');
+const { FASES, SUBFASES, EQUIPOS, AVATARES, REACCIONES } = require('./estado');
 const { rankingIndividual, rankingEquipos } = require('./puntaje');
 const { casillasPasaporte } = require('./pasaporte');
 
@@ -40,6 +40,7 @@ function resumenJuego(motor, rol, jugador) {
     rondaId: j.rondas[j.indiceRonda]?.id ?? null,
     inicioActivaMs: j.inicioActivaMs,
     finActivaMs: j.finActivaMs,
+    autoHastaMs: j.autoHastaMs,
   };
   if (rol === 'jugador') {
     const enRevelacion = j.subfase === SUBFASES.REVELACION || j.subfase === SUBFASES.RESULTADOS;
@@ -65,6 +66,27 @@ function resumenJuego(motor, rol, jugador) {
   };
 }
 
+// Votacion: el host ve el conteo en vivo; el jugador ve las opciones, su voto y el resultado al cerrar
+function resumenVotacion(motor, jugador) {
+  const v = motor.estado.votacion;
+  if (!v) return null;
+  const conteo = motor.conteoVotos(v);
+  const opciones = v.opciones.map((id) => {
+    const e = motor.juegos.get(id);
+    return { id, nombre: e.nombre, tema: e.tema, descripcion: e.descripcion, votos: jugador && !v.cerrada ? null : conteo[id] };
+  });
+  return {
+    opciones,
+    totalVotos: v.votos.size,
+    inicioMs: v.inicioMs,
+    finMs: v.finMs,
+    cerrada: v.cerrada,
+    ganador: v.ganador,
+    empate: v.empate,
+    miVoto: jugador ? v.votos.get(jugador.id) || null : undefined,
+  };
+}
+
 // Vista personalizada de un jugador (sin serverNow: lo agrega quien emite)
 function vistaJugador(motor, jugador, cache) {
   const { estado } = motor;
@@ -75,18 +97,22 @@ function vistaJugador(motor, jugador, cache) {
     yo: {
       id: jugador.id,
       nombre: jugador.nombre,
+      avatar: jugador.avatar,
       equipo: eq,
       puntos: jugador.puntos,
       posicion: cache.posiciones.get(jugador.id),
       sellos: jugador.sellos,
     },
+    catalogo: { avatares: AVATARES, reacciones: REACCIONES },
     pasaporte: casillasPasaporte(motor.juegos, jugador),
     totalJugadores: estado.jugadores.size,
     juego: null,
+    votacion: null,
     equipos: null,
     podio: null,
   };
   if (estado.fase === FASES.JUEGO) vista.juego = resumenJuego(motor, 'jugador', jugador);
+  if (estado.fase === FASES.VOTACION) vista.votacion = resumenVotacion(motor, jugador);
   if (estado.fase === FASES.MENU || estado.fase === FASES.PODIO) vista.equipos = cache.equipos;
   if (estado.fase === FASES.PODIO) vista.podio = cache.podio;
   return vista;
@@ -100,6 +126,7 @@ function vistaHost(motor, cache, publicUrl) {
     .map((p) => ({
       id: p.id,
       nombre: p.nombre,
+      avatar: p.avatar,
       equipoId: p.equipoId,
       puntos: p.puntos,
       conectado: p.conectado,
@@ -115,6 +142,8 @@ function vistaHost(motor, cache, publicUrl) {
     equipos: cache.equipos,
     ranking: cache.ranking.slice(0, 10),
     podio: estado.fase === FASES.PODIO ? cache.podio : null,
+    automatico: estado.automatico,
+    votacion: estado.fase === FASES.VOTACION ? resumenVotacion(motor, null) : null,
     menu: {
       juegos: [...motor.juegos.values()].map((e) => ({
         id: e.id,

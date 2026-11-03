@@ -84,6 +84,13 @@ module.exports = {
     return puntos;
   },
 
+  // En modo automatico el juego no pasa a la siguiente ronda hasta que el host gire la ruleta
+  esperarHost(ctx) {
+    const j = ctx.juego;
+    const proxima = j.rondas[j.indiceRonda + 1];
+    return Boolean(proxima) && !(j.datos.giro && j.datos.giro.rondaId === proxima.id);
+  },
+
   acciones: {
     // El host gira la ruleta para la ronda que viene. Un segundo giro para la misma ronda se ignora.
     girar(ctx) {

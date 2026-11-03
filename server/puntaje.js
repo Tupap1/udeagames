@@ -12,7 +12,7 @@ function rankingIndividual(estado) {
   return lista.map((j, i) => {
     if (!previo || previo.puntos !== j.puntos || previo.tiempoMs !== j.tiempoMs) posicion = i + 1;
     previo = j;
-    return { id: j.id, nombre: j.nombre, equipoId: j.equipoId, puntos: j.puntos, posicion };
+    return { id: j.id, nombre: j.nombre, avatar: j.avatar, equipoId: j.equipoId, puntos: j.puntos, posicion };
   });
 }
 
