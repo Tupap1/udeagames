@@ -1,0 +1,21 @@
+{
+  "name": "pasaporte-udea",
+  "version": "0.1.0",
+  "description": "Pasaporte UdeA en vivo: plataforma de juegos en vivo tipo Kahoot para Vivamos la Universidad",
+  "private": true,
+  "license": "UNLICENSED",
+  "engines": { "node": ">=22.9" },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server/index.js",
+    "bots": "node --env-file-if-exists=.env scripts/bots.js",
+    "test": "node --test \"test/*.test.js\""
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "qrcode": "^1.5.4",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "socket.io-client": "^4.8.1"
+  }
+}

@@ -1,0 +1,86 @@
+/* Vista del host: pensada para proyector. Texto grande, legible desde el fondo del salon. */
+html { font-size: clamp(16px, 1.55vw, 30px); }
+
+.pantalla-pin { min-height: 100vh; display: grid; place-items: center; padding: 16px; }
+#form-pin { display: grid; gap: 14px; width: min(420px, 100%); text-align: center; }
+
+.host { height: 100vh; display: flex; flex-direction: column; padding: 1rem 1.6rem; gap: 1rem; }
+
+.barra { display: flex; align-items: center; gap: 1rem; }
+.barra .marca { font-size: 1.3rem; }
+.espaciador { flex: 1; }
+.boton.chico { min-height: 40px; font-size: 0.9rem; padding: 0 1rem; }
+
+.escenario { flex: 1; min-height: 0; overflow: auto; display: flex; flex-direction: column; gap: 1.2rem; }
+
+.controles { display: flex; gap: 1rem; justify-content: flex-end; align-items: center; min-height: 3.4rem; }
+.controles .boton { min-height: 3.2rem; font-size: 1.15rem; }
+.controles .atajo { opacity: 0.7; font-size: 0.8rem; font-weight: 600; }
+
+h1.titulo { font-size: 2.3rem; }
+h2.subtitulo { font-size: 1.35rem; margin-bottom: 0.4rem; }
+
+/* Lobby */
+.lobby { flex: 1; min-height: 0; display: grid; grid-template-columns: auto 1fr; gap: 2.5rem; align-items: start; }
+/* El QR se limita por el ALTO de la pantalla para que nunca quede cortado en el proyector */
+.qr-caja { background: #fff; border-radius: 1.2rem; padding: 1rem; width: min(30rem, 50vh); }
+.qr-caja img { display: block; width: 100%; height: auto; }
+.url-grande { font-size: 1.4rem; font-weight: 800; word-break: break-all; margin-top: 0.8rem; color: var(--acento); max-width: min(30rem, 50vh); }
+.nube { display: grid; grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); gap: 0.35rem; margin-top: 0.6rem; max-height: 48vh; overflow: auto; align-content: start; }
+.chip {
+  display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.2rem 0.8rem 0.2rem 0.25rem;
+  border-radius: 999px; background: var(--superficie); font-size: 0.95rem; font-weight: 700; min-width: 0;
+}
+.chip { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.chip.desconectado { opacity: 0.45; }
+.contador-grande { font-size: 3.2rem; font-weight: 800; line-height: 1; }
+
+/* Menu */
+.menu { display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem; align-items: start; }
+.juegos { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1rem; }
+.juego-tarjeta {
+  text-align: left; display: grid; gap: 0.4rem; padding: 1.2rem; border-radius: 1.2rem; cursor: pointer;
+  background: var(--superficie); border: 3px solid var(--borde);
+}
+.juego-tarjeta:hover, .juego-tarjeta:focus-visible { border-color: var(--acento); outline: none; }
+.juego-tarjeta .nombre { font-size: 1.5rem; font-weight: 800; }
+.juego-tarjeta .tema { font-size: 0.9rem; color: var(--acento); font-weight: 700; text-transform: uppercase; }
+.juego-tarjeta .jugado { font-weight: 800; color: var(--acento); }
+.aviso-vacio { padding: 1.4rem; border: 3px dashed var(--borde); border-radius: 1.2rem; color: var(--texto-suave); }
+.mini-qr { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; align-items: center; margin-top: 1rem; }
+.mini-qr .qr-caja { padding: 0.4rem; border-radius: 0.6rem; width: 7rem; }
+
+.tabla-ranking { width: 100%; border-collapse: collapse; font-size: 1.05rem; }
+.tabla-ranking td { padding: 0.2rem 0.5rem; }
+.tabla-ranking td:last-child { text-align: right; font-weight: 800; font-variant-numeric: tabular-nums; }
+.barras { font-size: 1.05rem; }
+
+/* Juego (marco generico) */
+.marco-juego { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
+.cabecera-juego { display: flex; align-items: baseline; gap: 1.2rem; flex-wrap: wrap; }
+.cabecera-juego .etiqueta { padding: 0.2rem 0.9rem; border-radius: 999px; background: var(--superficie-2); font-weight: 800; }
+.cuerpo-juego { flex: 1; }
+.contador-respuestas { font-size: 1.4rem; font-weight: 700; }
+
+/* Podio */
+.podio-final { display: flex; justify-content: center; align-items: flex-end; gap: 1.5rem; min-height: 22rem; }
+.puesto { display: grid; justify-items: center; align-content: end; gap: 0.5rem; width: 14rem; padding: 1rem; border-radius: 1.2rem 1.2rem 0 0; background: var(--superficie-2); }
+.puesto .medalla { font-size: 3rem; }
+.puesto .nom { font-size: 1.6rem; font-weight: 800; text-align: center; word-break: break-word; }
+.puesto .pts { font-size: 1.3rem; color: var(--acento); font-weight: 800; }
+.puesto.p1 { min-height: 20rem; border-top: 6px solid #ffd54f; }
+.puesto.p2 { min-height: 15rem; border-top: 6px solid #cfd8dc; }
+.puesto.p3 { min-height: 12rem; border-top: 6px solid #d99a6c; }
+
+/* Panel lateral de jugadores */
+.panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(26rem, 90vw); z-index: 20;
+  display: flex; flex-direction: column; gap: 0.8rem; padding: 1rem;
+  background: var(--superficie); border-left: 3px solid var(--borde); box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+}
+.panel-cabecera { display: flex; align-items: center; justify-content: space-between; }
+.lista-jugadores { list-style: none; margin: 0; padding: 0; flex: 1; overflow: auto; display: grid; gap: 0.4rem; align-content: start; }
+.lista-jugadores li { display: flex; align-items: center; gap: 0.6rem; padding: 0.4rem 0.6rem; border-radius: 0.7rem; background: var(--superficie-2); }
+.lista-jugadores .nom { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700; }
+.lista-jugadores .punto { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--acento); }
+.lista-jugadores .punto.off { background: var(--borde); }

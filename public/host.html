@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Host · Pasaporte UdeA</title>
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/host.css">
+</head>
+<body>
+  <section id="pantalla-pin" class="pantalla-pin">
+    <form id="form-pin" autocomplete="off">
+      <h1>Host · Pasaporte UdeA</h1>
+      <input id="pin" class="campo" type="password" inputmode="numeric" placeholder="PIN del host" autocomplete="off">
+      <p id="error-pin" class="error" role="alert"></p>
+      <button class="boton" type="submit">Entrar</button>
+    </form>
+  </section>
+
+  <div id="pantalla-host" class="host" hidden>
+    <header class="barra">
+      <strong class="marca">Pasaporte UdeA</strong>
+      <span id="estado-conexion" class="suave"></span>
+      <span class="espaciador"></span>
+      <span id="resumen-jugadores"></span>
+      <button id="btn-jugadores" class="boton secundario chico" type="button">Jugadores (J)</button>
+    </header>
+    <main id="escenario" class="escenario"></main>
+    <footer id="controles" class="controles"></footer>
+  </div>
+
+  <aside id="panel-jugadores" class="panel" hidden>
+    <div class="panel-cabecera">
+      <h2>Jugadores</h2>
+      <button id="btn-cerrar-panel" class="boton secundario chico" type="button">Cerrar</button>
+    </div>
+    <ul id="lista-jugadores" class="lista-jugadores"></ul>
+    <button id="btn-reiniciar" class="boton peligro chico" type="button">Reiniciar todo (ensayo)</button>
+  </aside>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="/js/host.js"></script>
+</body>
+</html>
