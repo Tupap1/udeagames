@@ -178,6 +178,7 @@ async function renderJuego(esc, ctl) {
     avanzar: accion,
     ahoraServidor,
     equipos: vista.equipos,
+    ranking: vista.ranking,
   });
 }
 

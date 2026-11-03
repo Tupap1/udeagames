@@ -31,7 +31,11 @@ function cargarJuegos({ habilitados, dirContenido, dirJuegos = __dirname, log = 
       let contenido = null;
       if (modulo.contenido) {
         const ruta = path.join(dirContenido, modulo.contenido);
-        contenido = JSON.parse(fs.readFileSync(ruta, 'utf8'));
+        const crudo = fs.readFileSync(ruta, 'utf8');
+        contenido = JSON.parse(crudo);
+        // El contenido de ejemplo se marca con "verificar": true; avisamos para que no llegue a clase sin revisar
+        const pendientes = (crudo.match(/"verificar"\s*:\s*true/g) || []).length;
+        if (pendientes) log.log(`[juegos] AVISO ${id}: ${pendientes} elementos con [VERIFICAR] en ${modulo.contenido}`);
       }
       // Probamos crear las rondas una vez para detectar contenido mal formado
       const prueba = modulo.crearRondas(contenido);
