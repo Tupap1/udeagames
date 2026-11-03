@@ -68,11 +68,15 @@ test('ignora inputs fuera de fase, repetidos, de ronda vieja o invalidos', () =>
 test('el temporizador cierra la ronda activa y se ignoran los inputs tardios', async () => {
   const { motor } = crear({ duracionMs: 80 });
   const [ana] = unir(motor, 'Ana', 'Beto');
+  let avisos = 0;
+  motor.alCambiar = () => { avisos += 1; };
   motor.hostIrAMenu();
   motor.hostElegirJuego('falso');
   motor.hostAvanzar();
+  const antes = avisos;
   await esperar(150);
   assert.equal(motor.estado.juego.subfase, SUBFASES.REVELACION);
+  assert.ok(avisos > antes, 'al cerrar por tiempo el motor debe avisar a los clientes');
   assert.equal(motor.procesarInput(ana.id, 'r0', 'a').error, 'fuera_de_fase');
   motor.detener();
 });

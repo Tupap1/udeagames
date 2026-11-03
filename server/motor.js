@@ -149,7 +149,9 @@ function crearMotor({ juegos = new Map(), ahora = Date.now, log = console } = {}
     limpiarTimer();
     const token = ++j.token;
     timer = setTimeout(() => {
-      if (estado.juego && estado.juego.token === token) cerrarActiva();
+      if (!estado.juego || estado.juego.token !== token) return;
+      cerrarActiva();
+      cambio(); // sin esto los clientes no se enteran de que el tiempo se acabo
     }, duracion);
   }
 
