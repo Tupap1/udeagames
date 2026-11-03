@@ -18,8 +18,16 @@ npm install
 npm start
 ```
 
-Al arrancar imprime las URLs y el PIN del host. Abre `http://localhost:3000/host` en el computador del proyector
-y `http://localhost:3000/` en un celular (o en otra pestaña) para jugar.
+Al arrancar imprime el link y el PIN. Hay **un solo link para todos**:
+
+1. En el computador conectado al proyector, abre el link y pulsa **Crear sala**. Ese computador queda como
+   proyector (la página pasa sola a `/host`) y lo recuerda aunque recargues.
+2. Tus compañeros escanean el QR del pase de abordar y escriben su nombre. Si alguien entra antes de que abras
+   la sala, ve "La sala todavía no está abierta" y su pantalla cambia sola cuando la abres.
+3. El PIN solo sirve para mover el proyector a otro computador (en `/host`, "Tomar el control").
+
+Para probar como jugador en el mismo computador usa otra dirección (por ejemplo `localhost` si el proyector usa
+la IP) o una ventana de incógnito: con la misma dirección el navegador te reconoce como el proyector.
 
 ### Con Docker
 
@@ -57,7 +65,9 @@ npm run bots
 npm run bots -- --n 20 --url https://juego.btw-one.com --caidas 0.1
 ```
 
-Simula 40 jugadores (por defecto) que entran, responden al azar y se caen y reconectan. Imprime cada 5 segundos
+Simula 40 jugadores (por defecto) que entran, eligen destino en la votación, mandan reacciones en la sala de
+espera, responden al azar y se caen y reconectan. Si todavía no hay sala, esperan hasta que alguien pulse
+"Crear sala". Imprime cada 5 segundos
 cuántos están conectados, las reconexiones, los inputs aceptados o rechazados y la latencia de unión.
 Los bots usan nombres `Bot-01`, `Bot-02`... Si repites la prueba contra el mismo servidor, reinícialo o usa
 "Reiniciar todo" en el panel de jugadores del host, porque los nombres de la corrida anterior siguen ocupados.
@@ -71,19 +81,36 @@ npm test
 Cubren equipos balanceados, reconexión, expulsión, rankings, la máquina de estados y una partida completa por
 sockets reales. Usan un juego falso que vive solo en `test/` y no forma parte del producto.
 
-## Cómo se usa (host)
+## Cómo se usa (proyector)
 
-- `Espacio` o `→`: acción principal de la pantalla (ir al menú, avanzar de fase).
-- `J`: abre o cierra el panel de jugadores, donde se expulsa (dos clics) o se reinicia todo para ensayar.
+El recorrido es un viaje:
+
+1. **Embarque** (sala de espera): el QR en un pase de abordar y una pizarra de salidas donde cada pasajero aparece
+   con su insignia y su zona (equipo). En el celular cada uno elige su insignia de viajero y manda reacciones que
+   suben por el proyector.
+2. **Salidas** (menú): los juegos son destinos. Tocas uno para elegirlo tú, o pulsas **Votar el destino**.
+3. **Votación**: los celulares muestran los destinos y el proyector las barras en vivo. Cierra sola cuando todos
+   votaron o a los 20 segundos (o con `Espacio`). Gana el más votado; si hay empate, tocas tú el destino. Los
+   juegos ya jugados salen de la votación.
+4. **Juego**: `Espacio` empieza la primera escala (ronda). Con el **modo automático** (encendido por defecto) la
+   respuesta se ve 7 segundos, la clasificación otros 7 y sigue sola la siguiente ronda. "Pausar" lo detiene y
+   entonces avanzas con `Espacio`. La ruleta espera a que la gires antes de seguir.
+5. **Llegadas** (podio final) cuando quieras, desde Salidas.
+
+Atajos:
+
+- `Espacio` o `→`: acción principal de la pantalla (empezar, votar, cerrar votación, avanzar).
+- `J`: panel de pasajeros, donde se saca a alguien (dos clics), se borran pasajeros y puntajes para ensayar
+  (la sala sigue abierta) o se **cierra la sala** (la próxima persona que abra el link podrá crear otra).
 - `G`: gira la ruleta (solo en la Ruleta de Bienestar, antes de cada ronda).
 - `P`: muestra la siguiente pista (solo en Adivina el destino, con la ronda en juego).
 - El host se reautentica solo si se recarga la página, mientras la pestaña siga abierta.
 
 ## Los juegos
 
-Cada juego tiene intro, rondas (en juego, respuesta, resultados) y al terminar da un sello en el pasaporte a
-quien participó. En cada ronda el host pulsa `Espacio` para avanzar: empezar, cerrar (si no cierra sola),
-ver resultados y siguiente. La ronda cierra sola cuando todos los conectados respondieron o se acaba el tiempo.
+Cada juego tiene intro, rondas (en juego, respuesta, clasificación) y al terminar da un sello en el pasaporte a
+quien participó. La ronda cierra sola cuando todos los conectados respondieron o se acaba el tiempo; después,
+en modo automático, avanza sola (ver "Cómo se usa").
 
 | Juego | Rondas | Tiempo | Puntos |
 |---|---|---|---|
@@ -125,10 +152,23 @@ server/juegos/ Un módulo por juego + el registro que carga solo los habilitados
 content/       Contenido de cada juego (un JSON por juego)
 public/        Frontend sin framework y sin build (jugador, host, estilos)
 public/js/juegos/  Pantalla de cada juego (_comun.js: piezas compartidas)
+public/fuentes/    Overpass y Overpass Mono (licencia OFL), servidas localmente: no dependen del wifi
 scripts/       bots.js
 test/          Pruebas automáticas
 games.config.json   Lista de juegos habilitados
 ```
+
+## Diseño: "Sala de embarque"
+
+Todo el recorrido se presenta como un viaje: une el nombre (Pasaporte) con Internacionalización y le da sentido a
+los sellos. El proyector es un aeropuerto de noche; el celular es la tapa verde del pasaporte con papel de visado.
+
+- Color: azul noche (`--noche`), verde pasaporte (`--pasaporte`), papel (`--papel`) y un solo acento, el ámbar de
+  las pizarras de salidas (`--ambar`). Verde y rojo solo para acierto y error. Están en `public/css/base.css`.
+- Tipografía: Overpass (señalética vial) para todo y Overpass Mono solo en la pizarra, códigos y la línea del
+  pasaporte.
+- Lo único que se mueve solo es la pizarra que voltea letras (`public/js/compartido/pizarra.js`). Con
+  "reducir movimiento" activado en el sistema, no se anima.
 
 ## Cómo habilitar un juego
 
@@ -182,7 +222,7 @@ quedaría: celular, Cloudflare, túnel, Nginx Proxy Manager, app.
 1. Con el contenedor corriendo en el portátil (`-p 3000:3000`), abrir una terminal y ejecutar
    `tailscale funnel 3000`. Imprime una URL pública `https://...ts.net`.
 2. Detener el contenedor y volver a lanzarlo con `-e PUBLIC_URL=<esa URL>`, para que el QR apunte ahí.
-3. Abrir `/host` en el navegador del portátil con esa misma URL, no con localhost.
+3. Abrir esa misma URL (no localhost) en el navegador del portátil y pulsar **Crear sala**.
 
 ### Checklist antes de presentar
 

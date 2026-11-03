@@ -46,6 +46,31 @@ Node 22 LTS + Express + Socket.io, un solo proceso que sirve el frontend estáti
   hacerlo en 2 minutos.
 - Revisar que ninguna regla de Cloudflare (Access, Bot Fight Mode, WAF) bloquee `/socket.io/`.
 
+## Segunda actualización (2 de noviembre de 2026, noche): flujo de sala e identidad visual
+
+El equipo vio la versión anterior y no le gustó cómo se usaba ni cómo se veía ("sin temática, se ve
+vibecodeado"). Se rehízo con su OK:
+
+- **Un solo link.** El primero que lo abre pulsa "Crear sala" y ese computador queda como proyector (guarda un
+  token; si recarga sigue siendo host). Los demás caen en el registro. El PIN quedó solo para recuperar el
+  control desde otro equipo. Descartado: dejar el `/host` con PIN como entrada principal (era lo que confundía).
+  Riesgo aceptado: si un compañero abre el link antes, crea la sala él; se recupera con el PIN.
+- **Sala de espera con cosas que hacer:** insignia de viajero (lista cerrada de emojis) y reacciones que suben
+  por el proyector. Las reacciones no se permiten durante un juego para no tapar la pregunta.
+- **Votación del destino** (fase nueva VOTACION en el motor): 20 s o hasta que voten todos, se puede cambiar el
+  voto, empate o cero votos lo decide el host, los juegos jugados salen de las opciones.
+- **Modo automático** (encendido por defecto): respuesta 7 s, clasificación 7 s y sigue solo. Un juego puede
+  pedir esperar al host (`esperarHost`); la ruleta lo usa para esperar el giro. Descartado: todo manual, porque
+  obligaba a saberse la secuencia de teclas frente a la clase.
+- **Identidad "Sala de embarque"**, elegida entre tres propuestas (las otras eran "Cartelera del bloque" y
+  "Parqués"): pase de abordar con el QR, pizarra de salidas con letras que voltean, juegos como destinos,
+  rondas como escalas, podio como "Llegadas" y pasaporte con sellos de tinta. Fuentes Overpass locales.
+- Tocó el motor (sala, votación y modo automático); los juegos solo ganaron `esperarHost` en la ruleta.
+- Pruebas: 38 (7 nuevas en `test/flujo.test.js`). Ensayo en Docker: host automático abrió la sala, votación de
+  40 bots, los 3 juegos completos, 653 respuestas aceptadas, 0 rechazadas, 0 errores en el servidor.
+
+Sigue sin verificar: iPhone y Android reales, el túnel, y el contenido real (sigue con `[VERIFICAR]`).
+
 ## Actualización de la sesión local (2 de noviembre de 2026)
 
 Hecho en local, sin el explain-back de la Fase 1: el equipo pidió saltarlo y hablarlo aparte con el otro agente.
