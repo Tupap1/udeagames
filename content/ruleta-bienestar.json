@@ -1,0 +1,40 @@
+{
+  "_aviso": "CONTENIDO DE EJEMPLO. Reemplacen las categorias y preguntas por lo visto en clase y borren \"verificar\" (o pongan false). La opcion correcta se escribe siempre en el indice indicado por \"correcta\" (0 es la primera); el servidor baraja el orden al jugar. Cada categoria necesita al menos 1 pregunta y el color debe ser un hex de 6 digitos.",
+  "categorias": [
+    {
+      "id": "salud", "nombre": "Salud", "icono": "🩺", "color": "#e53935",
+      "preguntas": [
+        { "texto": "¿Cuál de estos es un servicio típico de salud en Bienestar Universitario?", "opciones": ["Consulta médica general", "Alquiler de vivienda", "Venta de útiles", "Préstamo de vehículos"], "correcta": 0, "explicacion": "La atención en salud es una de las líneas básicas de Bienestar.", "verificar": true },
+        { "texto": "¿Qué es una buena práctica de vida saludable durante el semestre?", "opciones": ["Dormir bien y comer a horas regulares", "Estudiar toda la noche cada día", "Saltarse comidas para rendir más", "Evitar toda actividad física"], "correcta": 0, "explicacion": "Dormir y comer bien ayuda a rendir mejor y a manejar el estrés.", "verificar": true }
+      ]
+    },
+    {
+      "id": "deporte", "nombre": "Deporte", "icono": "⚽", "color": "#1e88e5",
+      "preguntas": [
+        { "texto": "¿Quiénes pueden participar en las actividades deportivas de Bienestar?", "opciones": ["Estudiantes de cualquier programa", "Solo deportistas profesionales", "Solo profesores", "Solo egresados"], "correcta": 0, "explicacion": "Están abiertas a la comunidad estudiantil, no solo a deportistas de alto nivel.", "verificar": true },
+        { "texto": "¿Qué beneficio tiene hacer deporte durante el semestre?", "opciones": ["Ayuda a manejar el estrés", "Hace perder la matrícula", "Reemplaza las clases", "No tiene ningún efecto"], "correcta": 0, "explicacion": "La actividad física ayuda a manejar el estrés y a conocer gente.", "verificar": true }
+      ]
+    },
+    {
+      "id": "cultura", "nombre": "Cultura", "icono": "🎭", "color": "#8e24aa",
+      "preguntas": [
+        { "texto": "¿Cuál de estas es una actividad cultural abierta a estudiantes?", "opciones": ["Grupos de música, teatro o danza", "Cursos de mecánica de autos", "Turnos de portería", "Trámite de pasaportes"], "correcta": 0, "explicacion": "Los grupos artísticos son parte de la oferta cultural.", "verificar": true },
+        { "texto": "¿Para qué sirven los espacios culturales de la universidad?", "opciones": ["Expresarse y conocer gente de otros programas", "Guardar objetos", "Reemplazar las clases", "Nada en particular"], "correcta": 0, "explicacion": "Son espacios para expresarse y conocer personas de otros programas.", "verificar": true }
+      ]
+    },
+    {
+      "id": "apoyo-psicosocial", "nombre": "Apoyo psicosocial", "icono": "🧠", "color": "#2e9e4f",
+      "preguntas": [
+        { "texto": "Si te sientes muy estresado por el semestre, ¿qué puedes hacer?", "opciones": ["Buscar apoyo psicosocial en Bienestar", "Ignorarlo hasta que pase", "Dejar todas las materias sin consultar", "Esconderlo siempre"], "correcta": 0, "explicacion": "Pedir apoyo a tiempo es lo más recomendable.", "verificar": true },
+        { "texto": "¿Qué caracteriza al apoyo psicosocial universitario?", "opciones": ["Es un espacio de escucha y orientación", "Es un examen de admisión", "Es una materia obligatoria con nota", "Es un descuento en la matrícula"], "correcta": 0, "explicacion": "Es un acompañamiento de escucha y orientación, sin nota.", "verificar": true }
+      ]
+    },
+    {
+      "id": "apoyo-economico", "nombre": "Apoyo económico", "icono": "💰", "color": "#fb8c00",
+      "preguntas": [
+        { "texto": "¿Para qué existen los apoyos socioeconómicos?", "opciones": ["Ayudar a estudiantes a sostener sus estudios", "Pagar vacaciones", "Comprar celulares", "Reemplazar el estudio"], "correcta": 0, "explicacion": "Buscan que las dificultades económicas no impidan continuar estudiando.", "verificar": true },
+        { "texto": "¿Dónde conviene preguntar por los requisitos de un apoyo?", "opciones": ["En el canal oficial de Bienestar", "En redes de desconocidos", "Con un compañero que no sabe", "En ningún lado"], "correcta": 0, "explicacion": "Los requisitos y fechas se confirman siempre en el canal oficial.", "verificar": true }
+      ]
+    }
+  ]
+}
