@@ -46,6 +46,22 @@ Node 22 LTS + Express + Socket.io, un solo proceso que sirve el frontend estáti
   hacerlo en 2 minutos.
 - Revisar que ninguna regla de Cloudflare (Access, Bot Fight Mode, WAF) bloquee `/socket.io/`.
 
+## Tercera actualización (3 de noviembre de 2026, madrugada): más juegos y cómo se eligen
+
+Pedido del equipo: más juegos y que el host decida cuáles entran y cómo se elige el siguiente.
+
+- **Destinos de la sesión:** en Salidas cada juego tiene un interruptor. La votación y el sorteo solo usan los que
+  quedan dentro (primero los que faltan por jugar). El host siempre puede tocar uno y jugarlo ya.
+- **Al azar:** fase VOTACION con `modo: 'azar'`; el servidor elige y el proyector lo anima en la pizarra. El
+  celular no sabe el resultado hasta que empieza el juego.
+- **Tres juegos nuevos**, elegidos por el equipo entre cuatro propuestas (se descartó por ahora la encuesta en vivo):
+  Sobrevive el semestre (opciones con puntaje graduado y energía), Ordena el trámite (tocar los pasos en orden) y
+  Mapa del mundo (tocar el mapa, puntos por distancia). Contenido de ejemplo con `[VERIFICAR]`.
+- Mapa: SVG generado desde Natural Earth (paquetes de desarrollo `world-atlas` y `topojson-client`, con permiso
+  del equipo). Los países que cruzan la línea de cambio de fecha se dibujan dos veces para evitar rayas.
+- Pruebas: 45. Ensayo en Docker con 40 bots: votación (salió empate y lo resolvió el host), sorteo con dos
+  destinos en la sesión y los 6 juegos completos; 1234 respuestas aceptadas, 0 rechazadas, 0 errores.
+
 ## Segunda actualización (2 de noviembre de 2026, noche): flujo de sala e identidad visual
 
 El equipo vio la versión anterior y no le gustó cómo se usaba ni cómo se veía ("sin temática, se ve

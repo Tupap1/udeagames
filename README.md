@@ -88,7 +88,11 @@ El recorrido es un viaje:
 1. **Embarque** (sala de espera): el QR en un pase de abordar y una pizarra de salidas donde cada pasajero aparece
    con su insignia y su zona (equipo). En el celular cada uno elige su insignia de viajero y manda reacciones que
    suben por el proyector.
-2. **Salidas** (menú): los juegos son destinos. Tocas uno para elegirlo tú, o pulsas **Votar el destino**.
+2. **Salidas** (menú): los juegos son destinos. Cada uno tiene un interruptor de "en la sesión": deja dentro solo
+   los que quieras jugar hoy. Luego decides cómo se elige el siguiente:
+   - **Elijo yo**: tocas el destino y arranca.
+   - **Votar el destino** (`Espacio`): vota la clase, entre los de la sesión que faltan por jugar.
+   - **Al azar** (`A`): la pizarra recorre los destinos de la sesión y cae en uno. Se puede sortear otra vez.
 3. **Votación**: los celulares muestran los destinos y el proyector las barras en vivo. Cierra sola cuando todos
    votaron o a los 20 segundos (o con `Espacio`). Gana el más votado; si hay empate, tocas tú el destino. Los
    juegos ya jugados salen de la votación.
@@ -117,6 +121,9 @@ en modo automático, avanza sola (ver "Cómo se usa").
 | Mito o verdad | 6 | 12 s | 100 si aciertas, más hasta 50 por rapidez |
 | Ruleta de Bienestar | 6 | 20 s | 100 si aciertas, más hasta 50 por rapidez |
 | Adivina el destino | 5 | 45 s | 100 si aciertas, más 50 por cada pista que aún no se había mostrado |
+| Sobrevive el semestre | 6 | 25 s | Lo que vale la opción elegida (la mejor 100, las otras menos); sin bono de rapidez |
+| Ordena el trámite | 4 | 35 s | 100 repartidos entre los pasos que quedan en su lugar, más hasta 50 por rapidez si están todos |
+| Mapa del mundo | 5 | 25 s | 250 en el punto exacto, bajando con la distancia hasta 0 a 4.000 km |
 
 - **Mito o verdad**: la tarjeta se desliza a la derecha (verdad) o a la izquierda (mito), con botones de respaldo.
 - **Ruleta de Bienestar**: el host gira la ruleta antes de empezar la ronda. La categoría ya está decidida en el
@@ -124,7 +131,15 @@ en modo automático, avanza sola (ver "Cómo se usa").
 - **Adivina el destino**: las pistas las suelta el host con `P` o con el botón. Se descartó soltarlas por reloj
   porque obligaba a modificar el motor; el costo es que depende de que el host las vaya mostrando.
 
-Con 10 a 15 minutos caben dos juegos, tres como máximo. Con 3 juegos hay que elegir cuáles se presentan.
+- **Sobrevive el semestre**: situaciones de la vida universitaria por semana. No hay una sola correcta: al revelar
+  se ve cuánto valía cada opción y en el celular se ve la energía que te queda.
+- **Ordena el trámite**: los pasos de un proceso salen desordenados; en el celular se tocan en orden (tocar uno
+  numerado lo quita) y se envía. El proyector muestra el orden correcto y qué porcentaje acertó cada paso.
+- **Mapa del mundo**: en el celular se toca el mapa (se desliza de lado) y se confirma. Al revelar, el proyector
+  muestra el lugar real, los toques de todos con el color de su equipo y quiénes quedaron más cerca.
+
+Con 10 a 15 minutos caben dos juegos, tres como máximo. En Salidas se dejan dentro de la sesión solo los que se van
+a presentar (ver "Cómo se usa").
 
 ## Cómo cambiar el contenido
 
@@ -140,6 +155,15 @@ imprime cuántos quedan. Al reemplazar el contenido por lo visto en clase, borre
   El servidor baraja las opciones al jugar. Cada categoría necesita al menos una pregunta.
 - `adivina-destino.json`: `destinos` (mínimo 4) con `nombre`, `pais` y `pistas` (de la más difícil a la más
   fácil, mínimo 2). Las opciones falsas de cada ronda salen de los otros destinos.
+- `sobrevive-semestre.json`: `situaciones` con `semana` (1 a 20, solo ordena las rondas), `texto`, `opciones`
+  (2 a 4, cada una con `texto` y `puntos` de 0 a 100) y `explicacion`.
+- `ordena-tramite.json`: `tramites` con `titulo`, `pasos` (3 a 5, **escritos en el orden correcto**; el servidor
+  los desordena) y `explicacion`.
+- `mapa-mundo.json`: `lugares` con `nombre`, `pais`, `lat` (-58 a 84) y `lon` (-180 a 180). Las coordenadas se
+  pueden copiar de cualquier mapa en línea.
+
+El mapa (`public/img/mapa-mundo.svg`) se generó una vez con `node scripts/generar-mapa.js` a partir de Natural
+Earth (dominio público, paquete `world-atlas`). No hace falta volver a generarlo para cambiar los lugares.
 
 Si un archivo está mal formado, el servidor dice cuál es el error en la consola y ese juego no aparece en el
 menú (no se cae). Por eso conviene arrancar y leer la consola antes de la presentación.
