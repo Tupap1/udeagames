@@ -3,42 +3,62 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0e1224">
+  <meta name="theme-color" content="#0e3b31">
   <title>Pasaporte UdeA en vivo</title>
+  <link rel="preload" href="/fuentes/overpass-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/jugador.css">
   <link rel="stylesheet" href="/css/juegos.css">
 </head>
-<body>
-  <div id="banner" class="banner" hidden>Sin conexión, reconectando…</div>
+<body class="jugador">
+  <div id="banner" class="banner" role="status" hidden>Sin conexión. Reconectando…</div>
 
-  <section id="pantalla-conexion" class="pantalla centro">
-    <h1>Pasaporte UdeA</h1>
-    <p class="suave">Conectando…</p>
+  <section id="pantalla-conexion" class="pantalla portada">
+    <div class="portada-caja">
+      <p class="marca">Pasaporte UdeA</p>
+      <p class="suave">Conectando…</p>
+    </div>
   </section>
 
-  <section id="pantalla-registro" class="pantalla centro" hidden>
-    <h1>Pasaporte UdeA</h1>
-    <p class="suave">Escribe tu nombre para entrar al juego</p>
-    <form id="form-registro" autocomplete="off">
-      <label class="oculto-visual" for="nombre">Tu nombre</label>
-      <input id="nombre" class="campo" name="nombre" type="text" maxlength="40"
-             autocomplete="off" autocapitalize="words" enterkeyhint="go" placeholder="Tu nombre">
-      <p id="error-registro" class="error" role="alert"></p>
-      <button id="btn-entrar" class="boton" type="submit">Entrar</button>
-    </form>
+  <section id="pantalla-sin-sala" class="pantalla portada" hidden>
+    <div class="portada-caja">
+      <p class="marca">Pasaporte UdeA</p>
+      <h1>La sala todavía no está abierta</h1>
+      <p class="suave">Si vas a presentar, ábrela desde el computador conectado al proyector: ese equipo mostrará el código para que entren los demás.</p>
+      <button id="btn-crear-sala" class="boton" type="button">Crear sala</button>
+      <p class="nota">Si vienes a jugar, espera aquí. Esta pantalla cambia sola cuando se abra la sala.</p>
+    </div>
   </section>
 
-  <section id="pantalla-aviso" class="pantalla centro" hidden>
-    <h1 id="aviso-titulo"></h1>
-    <p id="aviso-texto" class="suave"></p>
+  <section id="pantalla-registro" class="pantalla portada" hidden>
+    <div class="portada-caja">
+      <p class="marca">Pasaporte UdeA</p>
+      <h1>¿Cómo te llamas?</h1>
+      <p class="suave">Así vas a aparecer en la pizarra del proyector.</p>
+      <form id="form-registro" autocomplete="off">
+        <label class="oculto-visual" for="nombre">Tu nombre</label>
+        <input id="nombre" class="campo" name="nombre" type="text" maxlength="40"
+               autocomplete="off" autocapitalize="words" enterkeyhint="go" placeholder="Ana María">
+        <p id="error-registro" class="error" role="alert"></p>
+        <button id="btn-entrar" class="boton" type="submit">Abordar</button>
+      </form>
+      <a class="nota enlace" href="/host">Soy el presentador</a>
+    </div>
+  </section>
+
+  <section id="pantalla-aviso" class="pantalla portada" hidden>
+    <div class="portada-caja">
+      <p class="marca">Pasaporte UdeA</p>
+      <h1 id="aviso-titulo"></h1>
+      <p id="aviso-texto" class="suave"></p>
+    </div>
   </section>
 
   <section id="pantalla-principal" class="pantalla principal" hidden>
     <header id="cabecera" class="cabecera"></header>
     <main id="contenido" class="contenido"></main>
     <nav class="pestanas" aria-label="Secciones">
-      <button id="tab-jugar" class="tab activa" type="button">Jugar</button>
+      <button id="tab-jugar" class="tab activa" type="button">Viaje</button>
       <button id="tab-pasaporte" class="tab" type="button">Pasaporte</button>
     </nav>
   </section>

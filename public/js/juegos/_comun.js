@@ -1,7 +1,7 @@
 // Piezas que comparten las pantallas de los juegos. El nombre empieza con guion bajo porque
 // no es un juego: el host y el jugador solo importan /js/juegos/<id>.js de los ids habilitados.
 import { el } from '../compartido/dom.js';
-import { barrasEquipos } from '../compartido/componentes.js';
+import { barrasEquipos, tablaClasificacion } from '../compartido/componentes.js';
 
 const LETRAS = ['A', 'B', 'C', 'D'];
 
@@ -75,10 +75,10 @@ export function bloqueResultado(j, acerto, explicacion) {
 // ---------- Celular ----------
 
 export function pantallaIntroJugador(cont, j) {
-  pintarSi(cont, 'intro', () => el('div', { class: 'bienvenida' },
-    el('h2', {}, j.nombre),
+  pintarSi(cont, 'intro', () => el('div', { class: 'estado-grande' },
+    el('h1', {}, j.nombre),
     el('p', { class: 'suave' }, j.vista.instrucciones),
-    el('p', {}, 'Mira la pantalla: ya casi empieza.')));
+    el('p', { class: 'nota' }, 'Mira el proyector: ya casi despegamos.')));
 }
 
 // Pantalla de opcion multiple del celular (Ruleta y Adivina el destino la comparten).
@@ -139,10 +139,8 @@ export function panelResultados(cuerpo, j, ctx) {
   const ranking = ctx.ranking || [];
   const clave = `resultados|${j.rondaIndice}|${ranking.slice(0, 5).map((r) => `${r.id}:${r.puntos}`).join(',')}|${ctx.equipos.map((e) => e.promedio).join(',')}`;
   return pintarSi(cuerpo, clave, () => el('div', { class: 'panel-resultados' },
-    el('div', {}, el('h2', { class: 'subtitulo' }, 'Top individual'),
-      el('table', { class: 'tabla-ranking' }, el('tbody', {}, ranking.slice(0, 5).map((r) => el('tr', {},
-        el('td', {}, `${r.posicion}º`), el('td', {}, r.nombre), el('td', {}, r.puntos)))))),
-    el('div', {}, el('h2', { class: 'subtitulo' }, 'Equipos'), barrasEquipos(ctx.equipos))));
+    el('section', {}, el('h2', {}, 'Clasificación'), tablaClasificacion(ranking, { limite: 5 })),
+    el('section', {}, el('h2', {}, 'Equipos'), el('p', { class: 'nota' }, 'Promedio de puntos por pasajero'), barrasEquipos(ctx.equipos))));
 }
 
 // Pantalla de opcion multiple del proyector.

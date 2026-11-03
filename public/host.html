@@ -3,40 +3,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Host · Pasaporte UdeA</title>
+  <meta name="theme-color" content="#0f1b2d">
+  <title>Proyector · Pasaporte UdeA</title>
+  <link rel="preload" href="/fuentes/overpass-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/host.css">
   <link rel="stylesheet" href="/css/juegos.css">
 </head>
 <body>
-  <section id="pantalla-pin" class="pantalla-pin">
-    <form id="form-pin" autocomplete="off">
-      <h1>Host · Pasaporte UdeA</h1>
-      <input id="pin" class="campo" type="password" inputmode="numeric" placeholder="PIN del host" autocomplete="off">
-      <p id="error-pin" class="error" role="alert"></p>
-      <button class="boton" type="submit">Entrar</button>
-    </form>
+  <section id="pantalla-acceso" class="acceso">
+    <div class="acceso-caja">
+      <p class="marca">Pasaporte UdeA</p>
+      <h1 id="acceso-titulo">Conectando…</h1>
+      <p id="acceso-texto" class="suave"></p>
+      <button id="btn-crear-sala" class="boton" type="button" hidden>Crear sala</button>
+      <form id="form-pin" autocomplete="off" hidden>
+        <label class="etiqueta-campo" for="pin">PIN del presentador</label>
+        <input id="pin" class="campo" type="password" inputmode="numeric" autocomplete="off">
+        <p id="error-pin" class="error" role="alert"></p>
+        <button class="boton" type="submit">Tomar el control</button>
+      </form>
+    </div>
   </section>
 
   <div id="pantalla-host" class="host" hidden>
     <header class="barra">
-      <strong class="marca">Pasaporte UdeA</strong>
-      <span id="estado-conexion" class="suave"></span>
+      <span class="marca">Pasaporte UdeA</span>
+      <span id="estado-conexion" class="aviso-conexion" role="status"></span>
       <span class="espaciador"></span>
-      <span id="resumen-jugadores"></span>
-      <button id="btn-jugadores" class="boton secundario chico" type="button">Jugadores (J)</button>
+      <span id="resumen-jugadores" class="resumen mono"></span>
+      <span id="reloj" class="reloj mono" aria-label="Hora"></span>
+      <button id="btn-jugadores" class="boton secundario chico" type="button">Pasajeros <span class="atajo">J</span></button>
     </header>
     <main id="escenario" class="escenario"></main>
     <footer id="controles" class="controles"></footer>
+    <div id="capa-reacciones" class="capa-reacciones" aria-hidden="true"></div>
   </div>
 
   <aside id="panel-jugadores" class="panel" hidden>
     <div class="panel-cabecera">
-      <h2>Jugadores</h2>
+      <h2>Pasajeros</h2>
       <button id="btn-cerrar-panel" class="boton secundario chico" type="button">Cerrar</button>
     </div>
     <ul id="lista-jugadores" class="lista-jugadores"></ul>
-    <button id="btn-reiniciar" class="boton peligro chico" type="button">Reiniciar todo (ensayo)</button>
+    <div class="panel-acciones">
+      <button id="btn-reiniciar" class="boton secundario chico" type="button">Borrar pasajeros y puntajes</button>
+      <button id="btn-cerrar-sala" class="boton peligro chico" type="button">Cerrar la sala</button>
+    </div>
   </aside>
 
   <script src="/socket.io/socket.io.js"></script>

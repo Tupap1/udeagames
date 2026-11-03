@@ -99,7 +99,7 @@ export const jugador = {
       return el('div', { class: 'mito' },
         el('div', { class: 'tarjeta-mito', style: { cursor: 'default' } },
           el('span', { class: 'etiqueta-tema' }, v.tema), v.texto,
-          el('strong', { style: { color: v.esVerdad ? 'var(--acento)' : 'var(--peligro)' } }, `Era ${v.esVerdad ? 'VERDAD' : 'MITO'}`)),
+          el('span', { class: `veredicto ${v.esVerdad ? 'verdad' : 'mito'}` }, v.esVerdad ? 'VERDAD' : 'MITO')),
         bloqueResultado(j, v.acerte, v.explicacion),
         etiquetaVerificar(v.verificar));
     });

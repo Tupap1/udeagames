@@ -1,15 +1,62 @@
-/* Estilos base compartidos por jugador y host. Tema oscuro de alto contraste. */
+/* Sistema de diseño "Sala de embarque": compartido por el proyector y el celular.
+   Un solo acento (ámbar de pizarra de salidas). El resto es azul noche, verde pasaporte y papel. */
+
+@font-face {
+  font-family: "Overpass";
+  src: url("/fuentes/overpass-latin-wght-normal.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Overpass";
+  src: url("/fuentes/overpass-latin-ext-wght-normal.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Overpass Mono";
+  src: url("/fuentes/overpass-mono-latin-wght-normal.woff2") format("woff2-variations");
+  font-weight: 300 700;
+  font-display: swap;
+}
+
 :root {
-  --fondo: #0e1224;
-  --superficie: #1a2040;
-  --superficie-2: #252d57;
-  --borde: #3a4478;
-  --texto: #f4f6ff;
-  --texto-suave: #aab2d9;
-  --acento: #2dd4a7;
-  --acento-texto: #04271e;
-  --peligro: #ff6b6b;
-  --radio: 16px;
+  /* Aeropuerto de noche (proyector) */
+  --noche: #0f1b2d;
+  --noche-2: #15243a;
+  --noche-3: #1c2e4a;
+  --celda: #0a1322;
+  --linea: #263a59;
+  --linea-fuerte: #3a5279;
+  /* Pasaporte y papel (celular, pases de abordar) */
+  --pasaporte: #0e3b31;
+  --pasaporte-2: #134a3e;
+  --papel: #f3f6f1;
+  --papel-2: #e4ebe2;
+  --papel-linea: #c9d4c7;
+  --tinta: #12261f;
+  --tinta-suave: #4f6359;
+  /* Texto sobre fondo oscuro */
+  --texto: #eef2f7;
+  --texto-suave: #9aabc4;
+  /* El acento: ámbar de pizarra de salidas */
+  --ambar: #f5b53f;
+  --ambar-tinta: #2b1d00;
+  /* Estados */
+  --ok: #2fa36b;
+  --ok-fondo: #163f2f;
+  --mal: #e0483e;
+  --mal-fondo: #4a1d1c;
+  --sello: #5b45b0;
+
+  --fuente: "Overpass", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fuente-mono: "Overpass Mono", ui-monospace, "Cascadia Mono", Menlo, monospace;
+
+  --radio-control: 12px;
+  --radio-tarjeta: 18px;
+  --dur: 180ms;
 }
 
 * { box-sizing: border-box; }
@@ -17,59 +64,79 @@
 html, body { margin: 0; height: 100%; }
 
 body {
-  background: var(--fondo);
+  background: var(--noche);
   color: var(--texto);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.35;
+  font-family: var(--fuente);
+  font-weight: 450;
+  line-height: 1.4;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
   -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
 }
 
 [hidden] { display: none !important; }
 
 h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-weight: 800; line-height: 1.12; letter-spacing: -0.01em; }
 
 button, input { font: inherit; color: inherit; }
 
-/* Botones grandes, faciles de tocar */
+.mono { font-family: var(--fuente-mono); font-variant-numeric: tabular-nums; }
+.suave { color: var(--texto-suave); }
+
+:focus-visible { outline: 3px solid var(--ambar); outline-offset: 3px; }
+
+/* ---------- Botones ---------- */
 .boton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5em;
+  gap: 0.55em;
   min-height: 56px;
-  padding: 0 1.4em;
+  padding: 0 1.5em;
   border: 0;
-  border-radius: var(--radio);
-  background: var(--acento);
-  color: var(--acento-texto);
-  font-weight: 700;
+  border-radius: var(--radio-control);
+  background: var(--ambar);
+  color: var(--ambar-tinta);
+  font-weight: 800;
   font-size: 18px;
+  letter-spacing: 0.005em;
   cursor: pointer;
+  transition: transform var(--dur) ease, background-color var(--dur) ease, border-color var(--dur) ease;
 }
+.boton:hover { background: #ffc457; }
 .boton:active { transform: scale(0.98); }
-.boton:disabled { opacity: 0.5; cursor: default; }
-.boton.secundario { background: var(--superficie-2); color: var(--texto); border: 2px solid var(--borde); }
-.boton.peligro { background: transparent; color: var(--peligro); border: 2px solid var(--peligro); }
+.boton:disabled { opacity: 0.45; cursor: default; transform: none; }
+.boton.secundario { background: transparent; color: var(--texto); box-shadow: inset 0 0 0 1.5px var(--linea-fuerte); }
+.boton.secundario:hover { box-shadow: inset 0 0 0 1.5px var(--texto-suave); }
+.boton.peligro { background: transparent; color: #ff8a80; box-shadow: inset 0 0 0 1.5px #8e3a35; }
+.boton.peligro:hover { box-shadow: inset 0 0 0 1.5px var(--mal); }
+.boton.texto { background: transparent; color: var(--texto-suave); min-height: 44px; padding: 0 0.6em; font-weight: 650; text-decoration: underline; text-underline-offset: 0.2em; }
+.boton.texto:hover { color: var(--texto); }
+.boton .atajo {
+  font-family: var(--fuente-mono); font-size: 0.72em; font-weight: 600;
+  padding: 0.1em 0.45em; border-radius: 6px; background: rgba(0, 0, 0, 0.14);
+}
 
-/* font-size de 16px o mas evita el zoom automatico de iOS al enfocar */
+/* font-size de 16px o más evita el zoom automático de iOS al enfocar */
 .campo {
   width: 100%;
-  min-height: 56px;
-  padding: 0 16px;
-  border-radius: var(--radio);
-  border: 2px solid var(--borde);
-  background: var(--superficie);
-  color: var(--texto);
-  font-size: 18px;
+  min-height: 58px;
+  padding: 0 18px;
+  border-radius: var(--radio-control);
+  border: 1.5px solid var(--papel-linea);
+  background: #fff;
+  color: var(--tinta);
+  font-size: 19px;
+  font-weight: 650;
 }
-.campo:focus { outline: 3px solid var(--acento); outline-offset: 2px; }
+.campo::placeholder { color: #8a9a92; font-weight: 450; }
+.campo:focus { outline: 3px solid var(--ambar); outline-offset: 2px; border-color: var(--tinta-suave); }
 
-.error { color: var(--peligro); font-weight: 600; min-height: 1.4em; }
-.suave { color: var(--texto-suave); }
+.error { color: #ff8a80; font-weight: 650; min-height: 1.4em; }
 
-/* Insignia de equipo: color + forma, para no depender solo del color */
+/* ---------- Insignia de equipo: color + forma, para no depender solo del color ---------- */
 .insignia {
   display: inline-flex;
   align-items: center;
@@ -77,15 +144,48 @@ button, input { font: inherit; color: inherit; }
   border-radius: 999px;
   font-weight: 800;
   line-height: 1;
-  flex-shrink: 0; /* un nombre largo no debe aplastar la insignia */
+  flex-shrink: 0;
 }
-.insignia.chica { width: 1.7em; height: 1.7em; font-size: 0.9em; }
-.insignia.grande { width: 6rem; height: 6rem; font-size: 3rem; }
+.insignia.chica { width: 1.6em; height: 1.6em; font-size: 0.85em; }
+.insignia.grande { width: 5rem; height: 5rem; font-size: 2.4rem; }
 
-/* Barras de ranking por equipos */
-.barras { display: grid; gap: 0.6em; }
-.barras .fila { display: grid; grid-template-columns: 7.5em 1fr 3.5em; align-items: center; gap: 0.6em; }
-.barras .nombre { font-weight: 700; white-space: nowrap; }
-.barras .pista { height: 1.1em; background: var(--superficie); border-radius: 999px; overflow: hidden; }
-.barras .relleno { height: 100%; border-radius: 999px; transition: width 0.5s ease; }
-.barras .valor { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; }
+/* ---------- Avatar: la insignia de viajero ---------- */
+.avatar {
+  display: inline-grid; place-items: center; flex-shrink: 0;
+  width: 2.2em; height: 2.2em; border-radius: 50%;
+  background: var(--noche-3); font-size: 1em; line-height: 1;
+}
+
+/* ---------- Barras de ranking por equipos ---------- */
+.barras { display: grid; gap: 0.7em; }
+.barras .fila { display: grid; grid-template-columns: 7.5em minmax(0, 1fr) 3.5em; align-items: center; gap: 0.7em; }
+.barras .nombre { font-weight: 750; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.45em; }
+.barras .pista { height: 0.75em; background: var(--linea); border-radius: 999px; overflow: hidden; }
+.barras .relleno { height: 100%; border-radius: 999px; transition: width 0.6s ease; }
+.barras .valor { text-align: right; font-family: var(--fuente-mono); font-weight: 600; }
+
+/* ---------- Pizarra de salidas: celdas que voltean ---------- */
+.pizarra-texto { display: inline-flex; gap: 0.1em; }
+.celda {
+  position: relative;
+  display: inline-grid; place-items: center;
+  width: 1.02em; height: 1.42em;
+  background: var(--celda);
+  color: var(--ambar);
+  font-family: var(--fuente-mono);
+  font-weight: 600;
+  border-radius: 0.14em;
+  line-height: 1;
+}
+/* La costura horizontal de cada paleta */
+.celda::after {
+  content: "";
+  position: absolute; left: 0; right: 0; top: 50%;
+  height: 1px; background: rgba(0, 0, 0, 0.55);
+}
+.celda.vacia { color: transparent; }
+
+/* Cada animación decide qué hace con movimiento reducido; las transiciones se apagan todas */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0ms !important; }
+}
