@@ -1,81 +1,89 @@
 {
-  "_aviso": "CONTENIDO DE EJEMPLO. Reemplacen las situaciones por lo visto en clase y borren \"verificar\" (o pongan false). Cada opcion lleva \"puntos\" de 0 a 100: la mejor decision 100 y las demas menos. No hace falta que haya una sola de 100. \"semana\" (1 a 20) solo ordena las rondas. Se juegan 6 situaciones.",
+  "_aviso": "Situaciones escritas a partir de los servicios reales de Bienestar UdeA (verificados en paginas oficiales el 3-nov-2026; cada una trae su \"fuente\"). Las situaciones son ficticias; los servicios no. Cada opcion lleva \"puntos\" de 0 a 100: la mejor decision 100 y las demas menos. \"semana\" (1 a 20) solo ordena las rondas. Se juegan 6 situaciones.",
   "situaciones": [
     {
-      "semana": 1, "verificar": true,
+      "semana": 1,
       "texto": "Llegas a la U y no conoces a nadie en tu grupo.",
       "opciones": [
-        { "texto": "Me inscribo en un grupo deportivo o cultural de Bienestar", "puntos": 100 },
+        { "texto": "Me inscribo a un taller de Bienestar Cultural o a un curso de deporte formativo", "puntos": 100 },
         { "texto": "Espero a que alguien me hable", "puntos": 40 },
-        { "texto": "Paso todo el tiempo solo con el celular", "puntos": 10 },
+        { "texto": "Paso todo el tiempo libre solo con el celular", "puntos": 10 },
         { "texto": "Dejo de ir a clase", "puntos": 0 }
       ],
-      "explicacion": "Los grupos de Bienestar son una forma fácil de conocer gente de otros programas."
+      "explicacion": "Los talleres culturales y los cursos de deporte formativo son una forma fácil de conocer gente; el deporte formativo es gratuito.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/deporte-recreacion-actividad-fisica/formativo"
     },
     {
-      "semana": 4, "verificar": true,
-      "texto": "Esta semana no te alcanza la plata para el almuerzo.",
+      "semana": 3,
+      "texto": "El pasaje en Metro se te está comiendo la plata del mes.",
       "opciones": [
-        { "texto": "Pregunto en Bienestar por los apoyos de alimentación", "puntos": 100 },
+        { "texto": "Reviso si cumplo los requisitos del Tiquete Estudiantil", "puntos": 100 },
+        { "texto": "Dejo de ir a algunas clases para ahorrar", "puntos": 0 },
+        { "texto": "Me voy caminando todos los días aunque sea muy lejos", "puntos": 30 },
+        { "texto": "Pido plata prestada cada semana", "puntos": 20 }
+      ],
+      "explicacion": "El Tiquete Estudiantil da 50 % de descuento en el Metro, hasta 60 viajes al mes, para estudiantes de sedes de Medellín que cumplan los requisitos.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/apoyo/tiquete-estudiantil"
+    },
+    {
+      "semana": 5,
+      "texto": "Pasas jornadas largas en la U y no te alcanza para almorzar.",
+      "opciones": [
+        { "texto": "Lleno la caracterización y me postulo al servicio de alimentación", "puntos": 100 },
         { "texto": "Le pido prestado a un compañero cada día", "puntos": 40 },
         { "texto": "Compro solo dulces para aguantar", "puntos": 10 },
-        { "texto": "Me salto el almuerzo toda la semana", "puntos": 0 }
+        { "texto": "Me salto el almuerzo todo el semestre", "puntos": 0 }
       ],
-      "explicacion": "Existen apoyos socioeconómicos pensados para esto; los requisitos se confirman en el canal oficial."
+      "explicacion": "El servicio da un almuerzo diario o un subsidio a estudiantes de pregrado que cumplan los requisitos. En 2026 el formulario está abierto hasta el 15 de noviembre.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/apoyo/servicio-alimentacion"
     },
     {
-      "semana": 8, "verificar": true,
+      "semana": 8,
       "texto": "Tienes tres parciales la misma semana y no estás durmiendo.",
       "opciones": [
-        { "texto": "Organizo un horario y busco orientación para manejar el estrés", "puntos": 100 },
+        { "texto": "Pido una cita de psicoorientación para organizarme y manejar el estrés", "puntos": 100 },
         { "texto": "Hablo con los profesores para saber qué priorizar", "puntos": 70 },
         { "texto": "Estudio toda la noche a punta de café", "puntos": 20 },
         { "texto": "Copio en el examen", "puntos": 0 }
       ],
-      "explicacion": "Pedir orientación a tiempo funciona mejor que aguantar sin dormir."
+      "explicacion": "La psicoorientación es presencial o virtual e incluye asesorías como \"Estudiar a lo bien\".",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/bienestar-linea/agenda-cita"
     },
     {
-      "semana": 10, "verificar": true,
-      "texto": "Hace días te duele una muela.",
+      "semana": 10,
+      "texto": "Te duele una muela y no estás afiliado a ninguna EPS.",
       "opciones": [
-        { "texto": "Pido una cita en el servicio de salud", "puntos": 100 },
+        { "texto": "Consulto el plan básico de salud estudiantil de Bienestar", "puntos": 100 },
         { "texto": "Le pregunto a un amigo qué tomar", "puntos": 30 },
         { "texto": "Me automedico", "puntos": 20 },
         { "texto": "Espero a que se pase sola", "puntos": 0 }
       ],
-      "explicacion": "La atención en salud es uno de los servicios básicos de Bienestar."
+      "explicacion": "Quien no tiene afiliación a salud puede acceder temporalmente al plan básico; quien tiene EPS debe pedir la atención en su IPS.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/bienestar-saludable/saludable"
     },
     {
-      "semana": 12, "verificar": true,
-      "texto": "Hace semanas te sientes triste y sin ganas de nada.",
+      "semana": 12,
+      "texto": "Hace semanas te sientes muy mal y una noche no puedes más.",
       "opciones": [
-        { "texto": "Busco el apoyo psicosocial de Bienestar", "puntos": 100 },
+        { "texto": "Llamo o escribo a la Línea Alma, que atiende 24 horas", "puntos": 100 },
         { "texto": "Se lo cuento a alguien de confianza", "puntos": 70 },
         { "texto": "Me aíslo de todos", "puntos": 0 },
         { "texto": "Lo ignoro y sigo igual", "puntos": 0 }
       ],
-      "explicacion": "El acompañamiento psicosocial es un espacio de escucha, sin nota y sin juicio."
+      "explicacion": "La Línea Alma es gratuita, confidencial y atiende 24 horas, todos los días, en Medellín y las regiones: 018000 423874.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/bienestar-linea/linea-alma"
     },
     {
-      "semana": 14, "verificar": true,
-      "texto": "Te invitan a hacer deporte en la U, pero sientes que no tienes tiempo.",
+      "semana": 14,
+      "texto": "Quieres moverte más, pero sientes que no tienes tiempo ni plata para un gimnasio.",
       "opciones": [
-        { "texto": "Pruebo una actividad corta entre clases", "puntos": 100 },
+        { "texto": "Me inscribo a un curso gratuito de deporte formativo", "puntos": 100 },
         { "texto": "Lo dejo para las vacaciones", "puntos": 30 },
         { "texto": "Me inscribo en todo y no voy a nada", "puntos": 10 },
-        { "texto": "Nunca hago ejercicio", "puntos": 0 }
+        { "texto": "No hago nada de ejercicio", "puntos": 0 }
       ],
-      "explicacion": "Moverse un poco ayuda a rendir mejor en el estudio."
-    },
-    {
-      "semana": 16, "verificar": true,
-      "texto": "Terminas el semestre agotado.",
-      "opciones": [
-        { "texto": "Descanso y planeo el próximo semestre con tiempo para mí", "puntos": 100 },
-        { "texto": "Matriculo más materias para salir rápido", "puntos": 20 },
-        { "texto": "No pienso en eso hasta que empiecen las clases", "puntos": 40 }
-      ],
-      "explicacion": "Planear el descanso también es parte de cuidarse."
+      "explicacion": "Los cursos de deporte formativo son gratuitos, con cupos limitados.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/deporte-recreacion-actividad-fisica/formativo"
     }
   ]
 }

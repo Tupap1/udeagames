@@ -1,25 +1,35 @@
 {
-  "_aviso": "CONTENIDO DE EJEMPLO. Estos destinos NO son convenios reales de la UdeA: reemplacenlos por los destinos que vieron en clase y borren \"verificar\" (o pongan false). Ordenen las pistas de la mas dificil a la mas facil, la ultima casi regala la respuesta. Se necesitan al menos 4 destinos (de cada ronda se usan los otros como opciones falsas).",
+  "_aviso": "Destinos donde hay una universidad con convenio vigente con la UdeA, segun la lista oficial de convenios (consultada el 3-nov-2026; \"fuente\" en cada uno). Que un convenio este vigente no garantiza cupo de intercambio: eso lo dice cada convocatoria. Las pistas van de la mas dificil a la mas facil; la ultima casi regala la respuesta. Se necesitan al menos 4 destinos.",
   "destinos": [
     {
-      "nombre": "Lisboa", "pais": "Portugal", "verificar": true,
-      "pistas": ["En este lugar se habla portugués.", "Es una capital europea que mira al océano Atlántico.", "Tiene tranvías amarillos muy famosos.", "Es la capital de Portugal."]
+      "nombre": "Múnich", "pais": "Alemania",
+      "pistas": ["Está en Europa y allí se habla alemán.", "Es la capital del estado de Baviera.", "Es famosa por el Oktoberfest.", "Aquí está la Technical University of Munich, que tiene convenio con la UdeA."],
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/internacional/convenios-internacionales/Contenido/asMenuLateral/contConveniosVigentes/convenios-vigentes"
     },
     {
-      "nombre": "Ciudad de México", "pais": "México", "verificar": true,
-      "pistas": ["Está en Norteamérica y se habla español.", "Fue construida sobre un antiguo lago.", "Tiene una plaza enorme llamada el Zócalo.", "Es la capital de México."]
+      "nombre": "Madrid", "pais": "España",
+      "pistas": ["Está en Europa y allí se habla español.", "Es una capital en el centro de la península ibérica.", "Allí queda el Museo del Prado.", "Aquí está la Universidad Politécnica de Madrid, que tiene convenio con la UdeA."],
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/internacional/convenios-internacionales/Contenido/asMenuLateral/contConveniosVigentes/convenios-vigentes"
     },
     {
-      "nombre": "Madrid", "pais": "España", "verificar": true,
-      "pistas": ["Está en Europa y se habla español.", "Es una capital en el centro de la península ibérica.", "Allí queda el Museo del Prado.", "Es la capital de España."]
+      "nombre": "Turín", "pais": "Italia",
+      "pistas": ["Está en Europa y allí se habla italiano.", "Queda en el norte de su país, cerca de los Alpes.", "Fue la primera capital del país unificado.", "Aquí está el Politecnico di Torino, que tiene convenio con la UdeA."],
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/internacional/convenios-internacionales/Contenido/asMenuLateral/contConveniosVigentes/convenios-vigentes"
     },
     {
-      "nombre": "Buenos Aires", "pais": "Argentina", "verificar": true,
-      "pistas": ["Está en Suramérica y se habla español.", "Es una capital sobre el Río de la Plata.", "Es famosa por el tango.", "Es la capital de Argentina."]
+      "nombre": "Ciudad de México", "pais": "México",
+      "pistas": ["Está en Norteamérica y allí se habla español.", "Fue construida sobre un antiguo lago.", "Tiene una plaza enorme llamada el Zócalo.", "Aquí está la UNAM, que tiene convenio con la UdeA."],
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/internacional/convenios-internacionales/Contenido/asMenuLateral/contConveniosVigentes/convenios-vigentes"
     },
     {
-      "nombre": "Montreal", "pais": "Canadá", "verificar": true,
-      "pistas": ["Está en Norteamérica y allí se habla sobre todo francés.", "Es una ciudad construida en una isla del río San Lorenzo.", "Queda en la provincia de Quebec.", "Es una de las ciudades más grandes de Canadá."]
+      "nombre": "Santiago de Chile", "pais": "Chile",
+      "pistas": ["Está en Suramérica y allí se habla español.", "Es una capital rodeada por la cordillera de los Andes.", "La atraviesa el río Mapocho.", "Aquí está la Universidad de Chile, que tiene convenio con la UdeA."],
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/internacional/convenios-internacionales/Contenido/asMenuLateral/contConveniosVigentes/convenios-vigentes"
+    },
+    {
+      "nombre": "São Paulo", "pais": "Brasil",
+      "pistas": ["Está en Suramérica y allí se habla portugués.", "Es la ciudad más poblada de su país.", "Su avenida más famosa es la Avenida Paulista.", "Aquí está la Universidade de São Paulo, que tiene convenio con la UdeA."],
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/internacional/convenios-internacionales/Contenido/asMenuLateral/contConveniosVigentes/convenios-vigentes"
     }
   ]
 }

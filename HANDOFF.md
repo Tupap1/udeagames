@@ -46,6 +46,21 @@ Node 22 LTS + Express + Socket.io, un solo proceso que sirve el frontend estáti
   hacerlo en 2 minutos.
 - Revisar que ninguna regla de Cloudflare (Access, Bot Fight Mode, WAF) bloquee `/socket.io/`.
 
+## Cuarta actualización (3 de noviembre de 2026, mañana): contenido verificado
+
+El equipo pidió verificar el contenido con páginas públicas de la UdeA. Se investigó Bienestar e
+Internacionalización en fuentes oficiales (udea.edu.co) y se reescribieron los 6 archivos de `content/`. Cada
+elemento lleva su `fuente` y ninguno queda con `verificar: true`.
+
+- Comprobado a mano en las páginas: servicio de alimentación (requisitos, pasos, fechas 2026), plan básico de
+  salud (no reemplaza la EPS, es temporal), Línea Alma (gratuita, 24/7, regiones, 018000 423874), movilidad de
+  pregrado (asesoría, MOVI, aval, Prepara tu movilidad, reconocimiento, con o sin convenio) y las 12
+  universidades usadas como destino en la lista de convenios vigentes.
+- Lo que quedó fuera por no estar confirmado: costos de psicoorientación y talleres, el número de universidades a
+  las que se puede aplicar, cifras ambiguas.
+- Cuidado al presentar: que un convenio esté vigente no garantiza cupo de intercambio; las situaciones de
+  Sobrevive el semestre son ficticias aunque los servicios sean reales.
+
 ## Tercera actualización (3 de noviembre de 2026, madrugada): más juegos y cómo se eligen
 
 Pedido del equipo: más juegos y que el host decida cuáles entran y cómo se elige el siguiente.

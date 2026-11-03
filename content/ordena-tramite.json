@@ -1,30 +1,35 @@
 {
-  "_aviso": "CONTENIDO DE EJEMPLO. Estos pasos son genericos y NO son el procedimiento oficial de la UdeA: reemplacenlos por lo visto en clase y borren \"verificar\" (o pongan false). Escriban los pasos EN EL ORDEN CORRECTO (de 3 a 5); el servidor los desordena al jugar. Se juegan 4 tramites.",
+  "_aviso": "Pasos tomados de las paginas oficiales de la UdeA el 3-nov-2026 (\"fuente\" en cada tramite), resumidos para el juego. Escriban los pasos EN EL ORDEN CORRECTO (de 3 a 5); el servidor los desordena al jugar. Se juegan 4 tramites.",
   "tramites": [
     {
-      "titulo": "Postularte a un intercambio", "verificar": true,
-      "pasos": ["Revisar la convocatoria y sus requisitos", "Elegir la universidad de destino y las materias", "Enviar la postulación con los documentos", "Esperar el resultado y aceptar la plaza"],
-      "explicacion": "Todo empieza por la convocatoria: ahí están las fechas y los requisitos."
+      "titulo": "Postularte a un intercambio de pregrado",
+      "pasos": ["Ir a la asesoría de la Dirección de Relaciones Internacionales", "Elegir los destinos con el responsable de tu unidad académica", "Pedir la carta de aval con las materias que te homologarán", "Aplicar a la convocatoria en la plataforma MOVI"],
+      "explicacion": "La asesoría va primero; el aval lista las materias que se reconocerán al volver.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/internacional/movilidad-nacional-internacional/movilidad-internacional-pregrado"
     },
     {
-      "titulo": "Preparar el viaje después de ser aceptado", "verificar": true,
-      "pasos": ["Recibir la carta de aceptación", "Tramitar el pasaporte y la visa si se necesita", "Comprar el seguro médico y los tiquetes", "Viajar y presentarse en la universidad de destino"],
-      "explicacion": "La visa casi siempre pide la carta de aceptación, por eso va primero."
+      "titulo": "Después de que te aceptan en el intercambio",
+      "pasos": ["Recibir de la DRI las indicaciones para formalizar", "Participar en el ciclo Prepara tu movilidad", "Pagar el viaje, el seguro internacional y los trámites migratorios", "Ya en el destino, reportar cualquier cambio de materias en el aval"],
+      "explicacion": "El viaje, la manutención y el seguro internacional los paga el estudiante; los apoyos económicos se piden aparte.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/internacional/movilidad-nacional-internacional/movilidad-internacional-pregrado"
     },
     {
-      "titulo": "Reconocer las materias al regresar", "verificar": true,
-      "pasos": ["Pedir las notas a la universidad de destino", "Entregar las notas a la facultad", "La facultad estudia la equivalencia", "Las materias quedan reconocidas en tu historia académica"],
-      "explicacion": "Sin las notas oficiales no se puede estudiar la equivalencia."
+      "titulo": "Reconocer tus materias al regresar",
+      "pasos": ["Tener el certificado de notas de la universidad de destino", "Solicitar el reconocimiento de los cursos en tu unidad académica", "Tu unidad académica estudia la solicitud con su propio proceso"],
+      "explicacion": "Cada unidad académica tiene su proceso y sus tiempos para reconocer los cursos.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/internacional/movilidad-nacional-internacional/movilidad-internacional-pregrado"
     },
     {
-      "titulo": "Pedir una cita en Bienestar", "verificar": true,
-      "pasos": ["Identificar qué servicio necesitas", "Buscar el canal oficial para pedir la cita", "Agendar la cita", "Asistir y hacer el seguimiento"],
-      "explicacion": "Saber qué necesitas ayuda a llegar al servicio correcto."
+      "titulo": "Postularte al servicio de alimentación",
+      "pasos": ["Diligenciar la ficha de caracterización en el Portal", "Radicar el formulario de Solicitudes de Servicios con tu justificación", "Bienestar estudia tu caso y te cita para verificar la información", "Ver en el formulario el resultado y la modalidad asignada"],
+      "explicacion": "La caracterización es obligatoria; en 2026 el formulario está abierto del 20 de enero al 15 de noviembre.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/apoyo/servicio-alimentacion"
     },
     {
-      "titulo": "Entrar a un grupo cultural", "verificar": true,
-      "pasos": ["Consultar la oferta de grupos", "Inscribirse en el que te guste", "Ir a la primera sesión", "Presentarse en una muestra o evento"],
-      "explicacion": "La oferta se publica al comienzo del semestre."
+      "titulo": "Pedir tu primera cita de psicoorientación",
+      "pasos": ["Diligenciar la encuesta de caracterización", "Confirmar que es tu primera cita de psicoorientación", "Elegir profesional y modalidad, presencial o virtual", "Agendar la cita con el enlace del profesional"],
+      "explicacion": "Para las citas de seguimiento se escribe al profesional o se va a la taquilla de Promoción de la Salud.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/bienestar-linea/agenda-cita"
     }
   ]
 }

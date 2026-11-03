@@ -1,39 +1,99 @@
 {
-  "_aviso": "CONTENIDO DE EJEMPLO. Reemplacen las categorias y preguntas por lo visto en clase y borren \"verificar\" (o pongan false). La opcion correcta se escribe siempre en el indice indicado por \"correcta\" (0 es la primera); el servidor baraja el orden al jugar. Cada categoria necesita al menos 1 pregunta y el color debe ser un hex de 6 digitos.",
+  "_aviso": "Contenido verificado en las paginas oficiales de Bienestar de la UdeA el 3-nov-2026; cada pregunta trae su \"fuente\". Revisenlo con lo visto en clase antes de presentar. La opcion correcta va en el indice de \"correcta\" (0 es la primera); el servidor baraja el orden al jugar. Cada categoria necesita al menos 1 pregunta y el color debe ser un hex de 6 digitos.",
   "categorias": [
     {
       "id": "salud", "nombre": "Salud", "icono": "🩺", "color": "#e53935",
       "preguntas": [
-        { "texto": "¿Cuál de estos es un servicio típico de salud en Bienestar Universitario?", "opciones": ["Consulta médica general", "Alquiler de vivienda", "Venta de útiles", "Préstamo de vehículos"], "correcta": 0, "explicacion": "La atención en salud es una de las líneas básicas de Bienestar.", "verificar": true },
-        { "texto": "¿Qué es una buena práctica de vida saludable durante el semestre?", "opciones": ["Dormir bien y comer a horas regulares", "Estudiar toda la noche cada día", "Saltarse comidas para rendir más", "Evitar toda actividad física"], "correcta": 0, "explicacion": "Dormir y comer bien ayuda a rendir mejor y a manejar el estrés.", "verificar": true }
+        {
+          "texto": "¿Para quién es el plan básico de salud estudiantil de la UdeA?",
+          "opciones": ["Para estudiantes que no están afiliados a salud", "Para todos los estudiantes, y reemplaza la EPS", "Solo para profesores", "Solo para egresados"],
+          "correcta": 0,
+          "explicacion": "Es una atención básica y temporal para quien no tiene afiliación. No reemplaza la EPS y no es permanente.",
+          "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/bienestar-saludable/saludable"
+        },
+        {
+          "texto": "¿Qué es la Línea Alma de la UdeA?",
+          "opciones": ["Una línea gratuita, 24 horas, de salud mental y violencias basadas en género", "La emisora de la universidad", "Un curso virtual de inglés", "Una ruta de bus entre campus"],
+          "correcta": 0,
+          "explicacion": "Funciona desde septiembre de 2025 para la comunidad universitaria de Medellín y las regiones: 018000 423874 o WhatsApp.",
+          "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/bienestar-linea/linea-alma"
+        }
       ]
     },
     {
       "id": "deporte", "nombre": "Deporte", "icono": "⚽", "color": "#1e88e5",
       "preguntas": [
-        { "texto": "¿Quiénes pueden participar en las actividades deportivas de Bienestar?", "opciones": ["Estudiantes de cualquier programa", "Solo deportistas profesionales", "Solo profesores", "Solo egresados"], "correcta": 0, "explicacion": "Están abiertas a la comunidad estudiantil, no solo a deportistas de alto nivel.", "verificar": true },
-        { "texto": "¿Qué beneficio tiene hacer deporte durante el semestre?", "opciones": ["Ayuda a manejar el estrés", "Hace perder la matrícula", "Reemplaza las clases", "No tiene ningún efecto"], "correcta": 0, "explicacion": "La actividad física ayuda a manejar el estrés y a conocer gente.", "verificar": true }
+        {
+          "texto": "¿Cuánto cuestan los cursos de deporte formativo de Bienestar?",
+          "opciones": ["Son gratuitos, con cupos limitados", "Se pagan aparte cada mes", "Vienen incluidos solo en posgrado", "Solo son para deportistas profesionales"],
+          "correcta": 0,
+          "explicacion": "Hay cursos gratuitos como judo, natación o ajedrez para estudiantes, docentes y empleados activos.",
+          "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/deporte-recreacion-actividad-fisica/formativo"
+        },
+        {
+          "texto": "Además del deporte formativo, ¿qué otras modalidades de deporte ofrece Bienestar?",
+          "opciones": ["Recreativo, representativo y deporte en las regiones", "Solo deporte de alto rendimiento pagado", "Ninguna otra", "Solo deportes electrónicos"],
+          "correcta": 0,
+          "explicacion": "Bienestar tiene deporte recreativo, representativo y el programa Deporte en tu región.",
+          "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/deporte-recreacion-actividad-fisica/formativo"
+        }
       ]
     },
     {
       "id": "cultura", "nombre": "Cultura", "icono": "🎭", "color": "#8e24aa",
       "preguntas": [
-        { "texto": "¿Cuál de estas es una actividad cultural abierta a estudiantes?", "opciones": ["Grupos de música, teatro o danza", "Cursos de mecánica de autos", "Turnos de portería", "Trámite de pasaportes"], "correcta": 0, "explicacion": "Los grupos artísticos son parte de la oferta cultural.", "verificar": true },
-        { "texto": "¿Para qué sirven los espacios culturales de la universidad?", "opciones": ["Expresarse y conocer gente de otros programas", "Guardar objetos", "Reemplazar las clases", "Nada en particular"], "correcta": 0, "explicacion": "Son espacios para expresarse y conocer personas de otros programas.", "verificar": true }
+        {
+          "texto": "¿Cuál de estos es un taller de Bienestar Cultural?",
+          "opciones": ["Guitarra, yoga o técnica vocal", "Mecánica automotriz", "Curso de conducción", "Contabilidad tributaria"],
+          "correcta": 0,
+          "explicacion": "Bienestar Cultural ofrece talleres como guitarra, yoga, bachata, técnica vocal y escritura creativa.",
+          "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/bienestar-cultural/formacion"
+        },
+        {
+          "texto": "¿Quiénes pueden entrar a semilleros como la Estudiantina o el Grupo Experimental de Danzas?",
+          "opciones": ["Estudiantes activos de la UdeA", "Solo profesores", "Cualquier persona sin vínculo con la U", "Solo egresados"],
+          "correcta": 0,
+          "explicacion": "Los semilleros (Estudiantina, Club de Estudiantes Cantores y Grupo Experimental de Danzas) son para estudiantes activos.",
+          "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/bienestar-cultural/formacion"
+        }
       ]
     },
     {
-      "id": "apoyo-psicosocial", "nombre": "Apoyo psicosocial", "icono": "🧠", "color": "#2e9e4f",
+      "id": "apoyo-social", "nombre": "Apoyo social", "icono": "🍽️", "color": "#fb8c00",
       "preguntas": [
-        { "texto": "Si te sientes muy estresado por el semestre, ¿qué puedes hacer?", "opciones": ["Buscar apoyo psicosocial en Bienestar", "Ignorarlo hasta que pase", "Dejar todas las materias sin consultar", "Esconderlo siempre"], "correcta": 0, "explicacion": "Pedir apoyo a tiempo es lo más recomendable.", "verificar": true },
-        { "texto": "¿Qué caracteriza al apoyo psicosocial universitario?", "opciones": ["Es un espacio de escucha y orientación", "Es un examen de admisión", "Es una materia obligatoria con nota", "Es un descuento en la matrícula"], "correcta": 0, "explicacion": "Es un acompañamiento de escucha y orientación, sin nota.", "verificar": true }
+        {
+          "texto": "¿Qué ofrece el servicio de alimentación estudiantil?",
+          "opciones": ["Un almuerzo diario, o un subsidio si el campus no puede darlo", "Desayuno, almuerzo y cena para todos", "Un mercado mensual para la familia", "Bonos para cualquier restaurante"],
+          "correcta": 0,
+          "explicacion": "Es para estudiantes de pregrado con dificultades económicas que cumplan los requisitos. Antes hay que llenar la caracterización.",
+          "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/apoyo/servicio-alimentacion"
+        },
+        {
+          "texto": "¿Qué descuento da el Tiquete Estudiantil en el Metro de Medellín?",
+          "opciones": ["50 %, hasta 60 viajes al mes", "100 %, sin límite", "10 %, solo los fines de semana", "Ninguno: es solo para bus"],
+          "correcta": 0,
+          "explicacion": "Es un programa de la Alcaldía de Medellín con apoyo de la UdeA, para estudiantes de sedes de Medellín que cumplan los requisitos.",
+          "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/apoyo/tiquete-estudiantil"
+        }
       ]
     },
     {
-      "id": "apoyo-economico", "nombre": "Apoyo económico", "icono": "💰", "color": "#fb8c00",
+      "id": "psicoorientacion", "nombre": "Psicoorientación", "icono": "🧠", "color": "#2e9e4f",
       "preguntas": [
-        { "texto": "¿Para qué existen los apoyos socioeconómicos?", "opciones": ["Ayudar a estudiantes a sostener sus estudios", "Pagar vacaciones", "Comprar celulares", "Reemplazar el estudio"], "correcta": 0, "explicacion": "Buscan que las dificultades económicas no impidan continuar estudiando.", "verificar": true },
-        { "texto": "¿Dónde conviene preguntar por los requisitos de un apoyo?", "opciones": ["En el canal oficial de Bienestar", "En redes de desconocidos", "Con un compañero que no sabe", "En ningún lado"], "correcta": 0, "explicacion": "Los requisitos y fechas se confirman siempre en el canal oficial.", "verificar": true }
+        {
+          "texto": "¿Qué hay que hacer antes de pedir la primera cita de psicoorientación?",
+          "opciones": ["Diligenciar la encuesta de caracterización", "Pagar la consulta", "Pedir una carta al decano", "Nada: se pide en cualquier taquilla"],
+          "correcta": 0,
+          "explicacion": "La caracterización es el primer paso; luego eliges profesional y modalidad y agendas.",
+          "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/bienestar-linea/agenda-cita"
+        },
+        {
+          "texto": "¿Cómo se puede recibir la psicoorientación de Bienestar?",
+          "opciones": ["Presencial o virtual, también desde las regiones", "Solo por carta", "Solo en vacaciones", "Solo presencial en Medellín"],
+          "correcta": 0,
+          "explicacion": "Es para pregrado y posgrado, presencial o virtual; en los campus regionales hay psicoorientador o atención virtual.",
+          "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/bienestar-linea/agenda-cita"
+        }
       ]
     }
   ]

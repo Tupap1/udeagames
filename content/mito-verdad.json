@@ -1,15 +1,83 @@
 {
-  "_aviso": "CONTENIDO DE EJEMPLO. Reemplacen estas afirmaciones por lo visto en clase y borren \"verificar\" (o pongan false) en cada una. Mientras diga true, el juego muestra la etiqueta [VERIFICAR] en pantalla.",
+  "_aviso": "Afirmaciones verificadas en paginas oficiales de la UdeA el 3-nov-2026; cada una trae su \"fuente\". Revisenlas con lo visto en clase antes de presentar. Se mezclan los dos temas y se juegan 6.",
   "afirmaciones": [
-    { "tema": "Bienestar", "texto": "Bienestar Universitario solo atiende a estudiantes de primer semestre.", "esVerdad": false, "explicacion": "Sus servicios están pensados para toda la comunidad estudiantil, no solo para quienes empiezan.", "verificar": true },
-    { "tema": "Bienestar", "texto": "Bienestar Universitario ofrece actividades de deporte y recreación para estudiantes.", "esVerdad": true, "explicacion": "El deporte y la recreación son una de sus líneas de trabajo.", "verificar": true },
-    { "tema": "Bienestar", "texto": "Para recibir apoyo psicológico hay que pagar una tarifa alta.", "esVerdad": false, "explicacion": "El acompañamiento psicosocial hace parte de los servicios de Bienestar para estudiantes.", "verificar": true },
-    { "tema": "Bienestar", "texto": "Hay grupos de música, teatro y danza abiertos a estudiantes de cualquier programa.", "esVerdad": true, "explicacion": "Los grupos culturales no están reservados a un programa en particular.", "verificar": true },
-    { "tema": "Bienestar", "texto": "Los servicios de Bienestar solo existen en la sede principal.", "esVerdad": false, "explicacion": "Hay servicios y actividades también fuera de la sede principal.", "verificar": true },
-    { "tema": "Internacionalización", "texto": "Un estudiante de pregrado puede hacer un semestre de intercambio en otra universidad.", "esVerdad": true, "explicacion": "La movilidad académica entrante y saliente está abierta a pregrado.", "verificar": true },
-    { "tema": "Internacionalización", "texto": "Para hacer movilidad internacional es obligatorio hablar inglés perfecto.", "esVerdad": false, "explicacion": "El idioma que se pide depende del destino y del convenio, no siempre es inglés ni perfecto.", "verificar": true },
-    { "tema": "Internacionalización", "texto": "Existen convocatorias con apoyo económico para movilidad internacional.", "esVerdad": true, "explicacion": "Hay convocatorias y becas, pero cada una tiene sus propios requisitos y fechas.", "verificar": true },
-    { "tema": "Internacionalización", "texto": "La movilidad internacional solo está disponible para estudiantes de posgrado.", "esVerdad": false, "explicacion": "También existe para estudiantes de pregrado.", "verificar": true },
-    { "tema": "Internacionalización", "texto": "Las materias cursadas en otra universidad pueden reconocerse en tu programa.", "esVerdad": true, "explicacion": "Se puede homologar siguiendo el proceso de la facultad.", "verificar": true }
+    {
+      "tema": "Bienestar", "esVerdad": false,
+      "texto": "El plan básico de salud estudiantil de la UdeA reemplaza la EPS.",
+      "explicacion": "No la reemplaza: es una atención temporal para quien no tiene afiliación a salud, y no es permanente.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/bienestar-saludable/saludable"
+    },
+    {
+      "tema": "Bienestar", "esVerdad": true,
+      "texto": "Los cursos de deporte formativo de Bienestar son gratuitos.",
+      "explicacion": "Son gratuitos, con cupos limitados, para estudiantes, docentes y empleados activos.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/deporte-recreacion-actividad-fisica/formativo"
+    },
+    {
+      "tema": "Bienestar", "esVerdad": false,
+      "texto": "Cualquier estudiante, incluso de posgrado, puede pedir el almuerzo del servicio de alimentación.",
+      "explicacion": "Es para estudiantes de pregrado de tiempo completo con vulnerabilidad socioeconómica que cumplan los requisitos.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/apoyo/servicio-alimentacion"
+    },
+    {
+      "tema": "Bienestar", "esVerdad": true,
+      "texto": "La Línea Alma atiende 24 horas, es gratuita y también sirve en las regiones.",
+      "explicacion": "Atiende salud mental y violencias basadas en género todos los días, en Medellín y las regiones: 018000 423874.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/bienestar-linea/linea-alma"
+    },
+    {
+      "tema": "Bienestar", "esVerdad": false,
+      "texto": "El Tiquete Estudiantil sirve en cualquier campus de la UdeA.",
+      "explicacion": "Es un programa de la Alcaldía de Medellín con apoyo de la UdeA y aplica para estudiantes de sedes de Medellín.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/apoyo/tiquete-estudiantil"
+    },
+    {
+      "tema": "Bienestar", "esVerdad": false,
+      "texto": "Bienestar Universitario es solo para los estudiantes.",
+      "explicacion": "Bienestar es para toda la comunidad universitaria: estudiantes, profesores y empleados.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/bienestar/bienestar-udea/bienestar-udea"
+    },
+    {
+      "tema": "Internacionalización", "esVerdad": false,
+      "texto": "Solo los estudiantes de posgrado pueden irse de intercambio.",
+      "explicacion": "Hay una convocatoria de movilidad internacional saliente para pregrado (la de 2027-1 se abrió en agosto de 2026).",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/internacional/movilidad-nacional-internacional/movilidad-internacional-pregrado"
+    },
+    {
+      "tema": "Internacionalización", "esVerdad": false,
+      "texto": "Para irte de intercambio siempre te exigen inglés.",
+      "explicacion": "El certificado de idioma se pide solo si la universidad de destino lo exige.",
+      "fuente": "https://www.udea.edu.co/wps/wcm/connect/udea/24808910-3975-4f50-add8-dff4e7a9e738/2023_Acuerdo+Acad%C3%A9mico2022.pdf?MOD=AJPERES&CVID=oDVXskN"
+    },
+    {
+      "tema": "Internacionalización", "esVerdad": true,
+      "texto": "Para el intercambio se pide haber cursado la mitad de los créditos y tener promedio de 3.5 o más.",
+      "explicacion": "Son requisitos del Acuerdo Académico 600 de 2022, junto con estar matriculado y no tener sanciones recientes.",
+      "fuente": "https://www.udea.edu.co/wps/wcm/connect/udea/24808910-3975-4f50-add8-dff4e7a9e738/2023_Acuerdo+Acad%C3%A9mico2022.pdf?MOD=AJPERES&CVID=oDVXskN"
+    },
+    {
+      "tema": "Internacionalización", "esVerdad": false,
+      "texto": "Solo te puedes ir a universidades que tengan convenio con la UdeA.",
+      "explicacion": "Se puede ir a instituciones con o sin convenio; sin convenio la universidad de destino podría cobrar matrícula.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/internacional/movilidad-nacional-internacional/movilidad-internacional-pregrado"
+    },
+    {
+      "tema": "Internacionalización", "esVerdad": false,
+      "texto": "Si te aceptan en el intercambio, recibes apoyo económico automáticamente.",
+      "explicacion": "Los apoyos se solicitan aparte, en sus propias convocatorias, y cofinancian: no cubren el costo total.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/internacional/tramites/apoyos-economicos"
+    },
+    {
+      "tema": "Internacionalización", "esVerdad": true,
+      "texto": "Las materias que ves en la universidad de destino se pueden reconocer al volver.",
+      "explicacion": "Antes de irte, la carta de aval lista las materias que se homologarán; al regresar pides el reconocimiento con tus notas.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/internacional/movilidad-nacional-internacional/movilidad-internacional-pregrado"
+    },
+    {
+      "tema": "Internacionalización", "esVerdad": true,
+      "texto": "La UdeA también recibe estudiantes extranjeros de intercambio.",
+      "explicacion": "Tiene movilidad entrante: recibe estudiantes de otras universidades del mundo hasta por dos periodos académicos.",
+      "fuente": "https://www.udea.edu.co/wps/portal/udea/web/inicio/internacional/movilidad-nacional-internacional/extranjeros-universidad"
+    }
   ]
 }

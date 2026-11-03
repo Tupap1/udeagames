@@ -4,10 +4,9 @@ Plataforma propia tipo Kahoot para la dinámica de "Vivamos la Universidad" (Bie
 Internacionalización). El host proyecta la pantalla, los compañeros escanean un QR, se registran una sola vez
 y el host elige desde un menú qué juego sigue.
 
-> **Estado actual: motor más 3 juegos.** Funcionan lobby con QR, registro, equipos, menú del host, ranking,
-> reconexión, expulsar jugadores, pasaporte, el simulador de bots y los juegos Mito o verdad, Ruleta de
-> Bienestar y Adivina el destino. **Todo el contenido de los juegos es de ejemplo** y está marcado con
-> `[VERIFICAR]`: hay que reemplazarlo por lo visto en clase (ver "Cómo cambiar el contenido").
+> **Estado actual: 6 juegos con contenido verificado.** El contenido sale de páginas oficiales de la UdeA
+> (consultadas el 3 de noviembre de 2026) y cada pregunta, afirmación, trámite o destino trae su `fuente` en el
+> JSON. Conviene repasarlo con lo visto en clase antes de presentar (ver "Cómo cambiar el contenido").
 
 ## Cómo correrlo
 
@@ -143,10 +142,20 @@ a presentar (ver "Cómo se usa").
 
 ## Cómo cambiar el contenido
 
-Todo vive en `content/`, un JSON por juego, y cada archivo trae un campo `_aviso` con las reglas. Mientras un
-elemento tenga `"verificar": true` se muestra la etiqueta `[VERIFICAR]` en pantalla y al arrancar el servidor
-imprime cuántos quedan. Al reemplazar el contenido por lo visto en clase, borren `verificar` (o pónganlo en
-`false`).
+Todo vive en `content/`, un JSON por juego, y cada archivo trae un campo `_aviso` con las reglas. Cada elemento
+lleva una `fuente` (la página oficial de la UdeA de donde salió); el juego no la muestra, es para revisar.
+Si agregan algo que todavía no han confirmado, pónganle `"verificar": true`: en pantalla sale la etiqueta
+`[VERIFICAR]` y al arrancar el servidor avisa cuántos quedan.
+
+De dónde salió el contenido:
+
+- Bienestar: portal de Bienestar UdeA (SalUdable, Línea Alma, psicoorientación, servicio de alimentación,
+  Tiquete Estudiantil, deporte formativo, Bienestar Cultural).
+- Internacionalización: página de movilidad internacional de pregrado, Acuerdo Académico 600 de 2022, apoyos
+  económicos y la lista oficial de convenios vigentes. Los destinos de Adivina el destino y del mapa son ciudades
+  con universidades que aparecen en esa lista. Que un convenio esté vigente no garantiza cupo de intercambio:
+  eso lo define cada convocatoria.
+- Las situaciones de Sobrevive el semestre son ficticias, pero los servicios que nombran son reales.
 
 - `mito-verdad.json`: `afirmaciones`, cada una con `texto`, `tema`, `esVerdad` (true o false) y `explicacion`.
   Se mezclan los temas y se juegan 6.
@@ -250,7 +259,7 @@ quedaría: celular, Cloudflare, túnel, Nginx Proxy Manager, app.
 
 ### Checklist antes de presentar
 
-- [ ] Contenido reemplazado por lo visto en clase y sin `[VERIFICAR]` en pantalla.
+- [ ] Contenido repasado con lo visto en clase (ya está verificado con fuentes oficiales y sin `[VERIFICAR]`).
 - [ ] `npm test` en verde y `docker build` sin errores.
 - [ ] Servidor arrancado: la consola lista los juegos habilitados y no dice "NO se pudo habilitar".
 - [ ] Un celular iPhone con Safari y uno Android con Chrome probaron: registro, deslizar la tarjeta, elegir
